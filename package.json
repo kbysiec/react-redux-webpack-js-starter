@@ -1,17 +1,46 @@
 {
   "name": "react-redux-webpack-typescript-template",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "This is template for easy start for react redux typescript application",
+  "author": "Kamil Bysiec",
+  "license": "MIT",
   "main": "app.js",
   "scripts": {
     "test": "test"
   },
-  "keywords": [
-    "react",
-    "redux",
-    "typescript",
-    "webpack"
-  ],
-  "author": "Kamil Bysiec",
-  "license": "MIT"
+  "dependencies": {
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "^4.0.8",
+    "redux": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/enzyme": "^3.1.10",
+    "@types/jest": "^22.2.3",
+    "@types/react": "^16.3.13",
+    "@types/react-dom": "^16.0.5",
+    "@types/react-hot-loader": "^4.1.0",
+    "@types/react-redux": "^5.0.18",
+    "@types/react-router-dom": "^4.2.6",
+    "@types/react-router-redux": "^5.0.13",
+    "@types/webpack": "^4.1.4",
+    "@types/webpack-dev-server": "^2.9.4",
+    "@types/webpack-env": "^1.13.6",
+    "awesome-typescript-loader": "^5.0.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^22.4.3",
+    "react-hot-loader": "^4.1.2",
+    "rimraf": "^2.6.2",
+    "ts-jest": "^22.4.4",
+    "ts-loader": "^4.2.0",
+    "tslint": "^5.9.1",
+    "tslint-react": "^3.5.1",
+    "webpack": "^4.6.0",
+    "webpack-dashboard": "^1.1.1",
+    "webpack-dev-server": "^3.1.3"
+  }
 }
