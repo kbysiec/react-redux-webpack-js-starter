@@ -6,7 +6,9 @@
   "license": "MIT",
   "main": "app.js",
   "scripts": {
-    "dev": "webpack --config config/webpack.dev.config.js --env.dev=true --env.ts=true",
+    "dev": "webpack-dev-server --config config/webpack.dev.config.js --env.dev=true --env.ts=false --open",
+    "dev-dashboard": "webpack-dashboard -m webpack-dev-server --config config/webpack.dev.config.js --env.dev=true --env.ts=false --open",
+    "build": "webpack --config config/webpack.dev.config.js --env.dev=true --env.ts=false",
     "test": "test"
   },
   "dependencies": {
