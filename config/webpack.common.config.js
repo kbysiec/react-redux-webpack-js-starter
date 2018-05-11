@@ -57,6 +57,53 @@ module.exports = {
                     },
                 ],
             },
+            {
+                test: /\.tsx?$/,
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: "babel-loader",
+                        options: {
+                            presets: [
+                                ["@babel/preset-env", {
+                                    targets: {
+                                        browsers: [
+                                            ">0.25%",
+                                            "not ie 11",
+                                        ],
+                                        useBuiltIns: true,
+                                    },
+                                }],
+                            ],
+                            plugins: [
+                                "@babel/plugin-syntax-dynamic-import",
+                            ],
+                        },
+                    },
+                    VARS.useAwesomeLoader ?
+                        {
+                            loader: "awesome-typescript-loader",
+                            options: {
+                                transpileOnly: true,
+                                useBabel: true,
+                                useTranspileModule: false,
+                                sourceMap: VARS.useSourceMaps,
+                            },
+                        } :
+                        {
+                            loader: "ts-loader",
+                            options: {
+                                transpileOnly: true,
+                                compilerOptions: {
+                                    sourceMap: VARS.useSourceMaps,
+                                    // target: VARS.isDev ? "es2015" : "es5",
+                                    // isolatedModules: true,
+                                    // noEmitOnError: false,
+                                },
+                            },
+                        },
+                ],
+            },
         ],
     },
 // plugins: [
