@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "module": "es2015",
+    "target": "esnext",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    //    "sourceMap": true
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
