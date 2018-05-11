@@ -6,9 +6,9 @@
   "license": "MIT",
   "main": "app.js",
   "scripts": {
-    "dev": "webpack-dev-server --config config/webpack.dev.config.js --env.dev=true --env.ts=false --open",
-    "dev-dashboard": "webpack-dashboard -m webpack-dev-server --config config/webpack.dev.config.js --env.dev=true --env.ts=false --open",
-    "build": "webpack --config config/webpack.dev.config.js --env.dev=true --env.ts=false",
+    "dev": "webpack-dev-server --config config/webpack.dev.config.js --env.dev=true --open",
+    "dev-dashboard": "webpack-dashboard -m webpack-dev-server --config config/webpack.dev.config.js --env.dev=true --open",
+    "build": "webpack --config config/webpack.dev.config.js --env.dev=true",
     "test": "test"
   },
   "dependencies": {
@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.46",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0-beta.46",
     "@babel/polyfill": "^7.0.0-beta.46",
     "@babel/preset-env": "^7.0.0-beta.46",
     "@babel/preset-react": "^7.0.0-beta.46",
