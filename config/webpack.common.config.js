@@ -43,11 +43,12 @@ module.exports = ((env = {}) => {
                             loader: "babel-loader",
                             options: {
                                 presets: [
-                                    ["@babel/preset-env", {
+                                    ["@babel/env", {
                                         targets: {
                                             browsers: VARS.supportedBrowsers,
-                                            useBuiltIns: VARS.useBabelPolyfill,
                                         },
+                                        useBuiltIns: VARS.useBabelPolyfill,
+                                        debug: true,
                                     }],
                                 ],
                                 plugins: [

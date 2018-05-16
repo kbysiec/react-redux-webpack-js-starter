@@ -10,17 +10,17 @@ const projectConfigVars = {};
 const projectConfigVarsDefaults = {
     isDev: true,
     isProd: false,
-    useBabelPolyfill: true,
+    useBabelPolyfill: "entry",
     useSourceMaps: true,
     useAwesomeLoader: false,
-    supportedBrowsers: [">0.25%", "not ie 11"],
+    supportedBrowsers: [">0.25%"],
 };
 
 const configure = function(env) {
     Object.assign(projectConfigVars, {
         isDev: env.dev ? env.dev == "true" : projectConfigVarsDefaults.isDev,
         isProd: env.prod ? env.prod == "true" : projectConfigVarsDefaults.isProd,
-        useBabelPolyfill: env.babelPolyfill ? env.babelPolyfill == "true" : projectConfigVarsDefaults.useBabelPolyfill,
+        useBabelPolyfill: env.babelPolyfill ? env.babelPolyfill : projectConfigVarsDefaults.useBabelPolyfill,
         useSourceMaps: env.sourceMaps ? env.sourceMaps == "true" : projectConfigVarsDefaults.useSourceMaps,
         useAwesomeLoader: env.awesomeLoader ? env.awesomeLoader == "true" : projectConfigVarsDefaults.useAwesomeLoader,
         supportedBrowsers: env.supportedBrowsers ?
