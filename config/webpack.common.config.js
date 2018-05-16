@@ -1,115 +1,113 @@
-const { PATHS, VARS } = require("./config.vars");
+const { configure } = require("./config.vars");
 
-module.exports = {
-    mode: "none",
-    cache: true,
+module.exports = ((env = {}) => {
+    const { PATHS, VARS } = configure(env);
 
-    context: PATHS.root,
+    return {
+        mode: "none",
+        cache: true,
 
-    entry: {
-        app: [
-        ],
-    },
-    output: {
-        path: `${PATHS.dist}/js`,
-        publicPath: "/",
-        filename: "[name].js",
-        chunkFilename: "chunk-[id].js",
-    },
-    resolve: {
-        extensions: [".js", ".jsx", ".ts", ".tsx", ".scss", ".less", ".html", ".json"],
-        modules: ["src", "node_modules"],
-    },
-    optimization: {
-        splitChunks: {
-            chunks: "all",
-            minSize: 10000,
-            maxAsyncRequests: 2,
-            maxInitialRequests: 2,
-            automaticNameDelimiter: '.',
+        context: PATHS.root,
+
+        entry: {
+            app: [
+            ],
         },
-        runtimeChunk: true, /* "single" */
-    },
-    module:{
-        rules: [
-            {
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
-                use: [
-                    {
-                        loader: "babel-loader",
-                        options: {
-                            presets: [
-                                ["@babel/preset-env", {
-                                    targets: {
-                                        browsers: [
-                                            ">0.25%",
-                                            "not ie 11",
-                                        ],
-                                        useBuiltIns: true,
-                                    },
-                                }],
-                            ],
-                            plugins: [
-                                "@babel/plugin-syntax-dynamic-import",
-                            ],
-                        },
-                    },
-                ],
+        output: {
+            path: `${PATHS.dist}/js`,
+            publicPath: "/",
+            filename: "[name].js",
+            chunkFilename: "chunk-[id].js",
+        },
+        resolve: {
+            extensions: [".js", ".jsx", ".ts", ".tsx", ".scss", ".sass", ".less", ".html", ".json"],
+            modules: ["src", "node_modules"],
+        },
+        optimization: {
+            splitChunks: {
+                chunks: "all",
+                minSize: 10000,
+                maxAsyncRequests: 2,
+                maxInitialRequests: 2,
+                automaticNameDelimiter: '.',
             },
-            {
-                test: /\.tsx?$/,
-                exclude: /node_modules/,
-                use: [
-                    {
-                        loader: "babel-loader",
-                        options: {
-                            presets: [
-                                ["@babel/preset-env", {
-                                    targets: {
-                                        browsers: [
-                                            ">0.25%",
-                                            "not ie 11",
-                                        ],
-                                        useBuiltIns: true,
-                                    },
-                                }],
-                            ],
-                            plugins: [
-                                "@babel/plugin-syntax-dynamic-import",
-                            ],
-                        },
-                    },
-                    VARS.useAwesomeLoader ?
+            runtimeChunk: true, /* "single" */
+        },
+        module: {
+            rules: [
+                {
+                    test: /\.jsx?$/,
+                    exclude: /node_modules/,
+                    use: [
                         {
-                            loader: "awesome-typescript-loader",
+                            loader: "babel-loader",
                             options: {
-                                transpileOnly: true,
-                                useBabel: true,
-                                useTranspileModule: false,
-                                sourceMap: VARS.useSourceMaps,
+                                presets: [
+                                    ["@babel/preset-env", {
+                                        targets: {
+                                            browsers: VARS.supportedBrowsers,
+                                            useBuiltIns: VARS.useBabelPolyfill,
+                                        },
+                                    }],
+                                ],
+                                plugins: [
+                                    "@babel/plugin-syntax-dynamic-import",
+                                ],
                             },
-                        } :
+                        },
+                    ],
+                },
+                {
+                    test: /\.tsx?$/,
+                    exclude: /node_modules/,
+                    use: [
                         {
-                            loader: "ts-loader",
+                            loader: "babel-loader",
                             options: {
-                                transpileOnly: true,
-                                compilerOptions: {
+                                presets: [
+                                    ["@babel/preset-env", {
+                                        targets: {
+                                            browsers: VARS.supportedBrowsers,
+                                            useBuiltIns: VARS.useBabelPolyfill,
+                                        },
+                                    }],
+                                ],
+                                plugins: [
+                                    "@babel/plugin-syntax-dynamic-import",
+                                ],
+                            },
+                        },
+                        VARS.useAwesomeLoader ?
+                            {
+                                loader: "awesome-typescript-loader",
+                                options: {
+                                    transpileOnly: true,
+                                    useBabel: true,
+                                    useTranspileModule: false,
                                     sourceMap: VARS.useSourceMaps,
-                                    // target: VARS.isDev ? "es2015" : "es5",
-                                    // isolatedModules: true,
-                                    // noEmitOnError: false,
+                                },
+                            } :
+                            {
+                                loader: "ts-loader",
+                                options: {
+                                    transpileOnly: true,
+                                    compilerOptions: {
+                                        sourceMap: VARS.useSourceMaps,
+                                        // target: VARS.isDev ? "es2015" : "es5",
+                                        // isolatedModules: true,
+                                        // noEmitOnError: false,
+                                    },
                                 },
                             },
-                        },
-                ],
-            },
-        ],
-    },
-// plugins: [
-//     new HtmlWebpackPlugin({
-//         template: `${PATHS.root}/index.html`,
-//         filename: `${PATHS.dist}/index.html`,
-    //     }),
-    // ],
-};
+                    ],
+                },
+            ],
+        },
+    // plugins: [
+    //     new HtmlWebpackPlugin({
+    //         template: `${PATHS.root}/index.html`,
+    //         filename: `${PATHS.dist}/index.html`,
+        //     }),
+        // ],
+    };
+})();

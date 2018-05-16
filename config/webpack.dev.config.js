@@ -1,14 +1,14 @@
 const commonConfig = require("./webpack.common.config.js");
 const webpack = require("webpack");
 const merge = require("webpack-merge");
+const autoprefixer = require("autoprefixer");
 const DashboardPlugin = require("webpack-dashboard/plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { configure } = require("./config.vars");
 
-module.exports = (env = {}) => {
+module.exports = ((env = {}) => {
     const { PATHS, VARS } = configure(env);
 
-    console.dir(VARS);
     const developmentConfig = {
         mode: "development",
         entry: {
@@ -29,6 +29,40 @@ module.exports = (env = {}) => {
         optimization: {
             namedModules: true,
         },
+        module: {
+            rules: [
+                {
+                    test: /\.(scss|sass)$/,
+                    exclude: /node_modules/,
+                    use: [
+                        "style-loader",
+                        {
+                            loader: "css-loader",
+                            options: {
+                                sourceMap: VARS.useSourceMaps,
+                            },
+                        },
+                        {
+                            loader: "postcss-loader",
+                            options: {
+                                plugins: [
+                                    autoprefixer({
+                                        browsers: VARS.supportedBrowsers,
+                                    })
+                                ],
+                                sourceMap: VARS.useSourceMaps,
+                            },
+                        },
+                        {
+                            loader: "sass-loader",
+                            options: {
+                                sourceMap: VARS.useSourceMaps,
+                            },
+                        },
+                    ],
+                },
+            ],
+        },
         plugins:[
             new webpack.DefinePlugin({
                 "process.env": {
@@ -47,10 +81,10 @@ module.exports = (env = {}) => {
 
     if (VARS.isDev){
         const merged = merge(commonConfig, developmentConfig);
-        console.dir(merged);
+        console.dir(merged.module.rules);
         return merged;
     }
     else {
         throw new Error("To use dev config set env.dev=true in npm inline script!");
     }
-};
+})();
