@@ -61,6 +61,36 @@ module.exports = ((env = {}) => {
                         },
                     ],
                 },
+                {
+                    test: /\.less$/,
+                    exclude: /node_modules/,
+                    use: [
+                        "style-loader",
+                        {
+                            loader: "css-loader",
+                            options: {
+                                sourceMap: VARS.useSourceMaps,
+                            },
+                        },
+                        {
+                            loader: "postcss-loader",
+                            options: {
+                                plugins: [
+                                    autoprefixer({
+                                        browsers: VARS.supportedBrowsers,
+                                    })
+                                ],
+                                sourceMap: VARS.useSourceMaps,
+                            },
+                        },
+                        {
+                            loader: "less-loader",
+                            options: {
+                                sourceMap: VARS.useSourceMaps,
+                            },
+                        },
+                    ],
+                },
             ],
         },
         plugins:[
