@@ -1,21 +1,28 @@
-const commonConfig = require("./webpack.common.config.js");
 const webpack = require("webpack");
-const merge = require("webpack-merge");
 const autoprefixer = require("autoprefixer");
 const DashboardPlugin = require("webpack-dashboard/plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { configure } = require("./config.vars");
 
-module.exports = ((env = {}) => {
+module.exports = (env = {}) => {
     const { PATHS, VARS } = configure(env);
+    console.dir(VARS);
 
-    const developmentConfig = {
+    return {
         mode: "development",
+        cache: true,
+        context: PATHS.root,
         entry: {
             app: [
                 // "react-hot-loader/patch",
                 `${PATHS.src}/index.js`
             ]
+        },
+        output: {
+            path: `${PATHS.dist}/js`,
+            publicPath: "/",
+            filename: "[name].js",
+            chunkFilename: "chunk-[id].js",
         },
         watch: true,
         devtool: "eval-source-map",
@@ -26,11 +33,90 @@ module.exports = ((env = {}) => {
             historyApiFallback: true,
             overlay: true,
         },
+        resolve: {
+            extensions: [".js", ".jsx", ".ts", ".tsx", ".scss", ".sass", ".less", ".html", ".json"],
+            modules: ["src", "node_modules"],
+        },
         optimization: {
+            splitChunks: {
+                chunks: "all",
+                minSize: 10000,
+                maxAsyncRequests: 2,
+                maxInitialRequests: 2,
+                automaticNameDelimiter: '.',
+            },
             namedModules: true,
+            runtimeChunk: true, /* "single" */
         },
         module: {
             rules: [
+                {
+                    test: /\.jsx?$/,
+                    exclude: /node_modules/,
+                    use: [
+                        {
+                            loader: "babel-loader",
+                            options: {
+                                presets: [
+                                    ["@babel/env", {
+                                        targets: {
+                                            browsers: VARS.supportedBrowsers,
+                                        },
+                                        useBuiltIns: VARS.useBabelPolyfill,
+                                        debug: true,
+                                    }],
+                                ],
+                                plugins: [
+                                    "@babel/plugin-syntax-dynamic-import",
+                                ],
+                            },
+                        },
+                    ],
+                },
+                {
+                    test: /\.tsx?$/,
+                    exclude: /node_modules/,
+                    use: [
+                        {
+                            loader: "babel-loader",
+                            options: {
+                                presets: [
+                                    ["@babel/preset-env", {
+                                        targets: {
+                                            browsers: VARS.supportedBrowsers,
+                                            useBuiltIns: VARS.useBabelPolyfill,
+                                        },
+                                    }],
+                                ],
+                                plugins: [
+                                    "@babel/plugin-syntax-dynamic-import",
+                                ],
+                            },
+                        },
+                        VARS.useAwesomeLoader ?
+                            {
+                                loader: "awesome-typescript-loader",
+                                options: {
+                                    transpileOnly: true,
+                                    useBabel: true,
+                                    useTranspileModule: false,
+                                    sourceMap: VARS.useSourceMaps,
+                                },
+                            } :
+                            {
+                                loader: "ts-loader",
+                                options: {
+                                    transpileOnly: true,
+                                    compilerOptions: {
+                                        sourceMap: VARS.useSourceMaps,
+                                        // target: VARS.isDev ? "es2015" : "es5",
+                                        // isolatedModules: true,
+                                        // noEmitOnError: false,
+                                    },
+                                },
+                            },
+                    ],
+                },
                 {
                     test: /\.(scss|sass)$/,
                     exclude: /node_modules/,
@@ -105,16 +191,12 @@ module.exports = ((env = {}) => {
             new HtmlWebpackPlugin({
                 template: `${PATHS.root}/index.html`,
             }),
+            // plugins: [
+            //     new HtmlWebpackPlugin({
+            //         template: `${PATHS.root}/index.html`,
+            //         filename: `${PATHS.dist}/index.html`,
+            //     }),
+            // ],
         ],
     };
-
-
-    if (VARS.isDev){
-        const merged = merge(commonConfig, developmentConfig);
-        console.dir(merged.module.rules);
-        return merged;
-    }
-    else {
-        throw new Error("To use dev config set env.dev=true in npm inline script!");
-    }
-})();
+};

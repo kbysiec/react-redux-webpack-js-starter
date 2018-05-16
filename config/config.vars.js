@@ -23,7 +23,7 @@ const configure = function(env) {
         useBabelPolyfill: env.babelPolyfill ? env.babelPolyfill : projectConfigVarsDefaults.useBabelPolyfill,
         useSourceMaps: env.sourceMaps ? env.sourceMaps == "true" : projectConfigVarsDefaults.useSourceMaps,
         useAwesomeLoader: env.awesomeLoader ? env.awesomeLoader == "true" : projectConfigVarsDefaults.useAwesomeLoader,
-        supportedBrowsers: env.supportedBrowsers ?
+        supportedBrowsers: env.supportedBrobabelPolyfillwsers ?
             env.supportedBrowsers.split(",").map(s => s.trim()) :
             projectConfigVarsDefaults.supportedBrowsers,
     });
