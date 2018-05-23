@@ -1,0 +1,12 @@
+{
+  "extends": "tslint-config-airbnb",
+  "linterOptions": {
+    "exclude": [
+      "./config/**.ts"
+    ]
+  },
+  "rules": {
+    "quotemark": [true, "single"],
+    "ter-indent": [true, 2]
+  }
+}
