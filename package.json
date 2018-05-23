@@ -12,6 +12,10 @@
     "lint-js": "eslint src/**",
     "lint-ts": "tslint --project ./tsconfig.json",
     "lint-scripts": "eslint src/** tslint --project ./tsconfig.json",
+    "lint-sass": "stylelint src/**/*.scss",
+    "lint-less": "stylelint src/**/*.less",
+    "lint-css": "stylelint src/**/*.css",
+    "lint-styles": "stylelint src/**/*.css src/**/*.scss src/**/*.less",
     "test": "test"
   },
   "dependencies": {
@@ -63,6 +67,9 @@
     "rimraf": "^2.6.2",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
+    "stylelint": "^9.2.1",
+    "stylelint-config-sass-guidelines": "^5.0.0",
+    "stylelint-scss": "^3.1.0",
     "ts-jest": "^22.4.6",
     "ts-loader": "^4.3.0",
     "tslint": "^5.10.0",
