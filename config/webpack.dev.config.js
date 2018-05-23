@@ -57,6 +57,18 @@ module.exports = (env = {}) => {
                     use: "eslint-loader",
                 },
                 {
+                    enforce: "pre",
+                    test: /\.tsx?$/,
+                    exclude: /node_modules/,
+                    use: {
+                        loader: "tslint-loader",
+                        options: {
+                            failOnHint: true,
+                            emitErrors: false,
+                        },
+                    },
+                },
+                {
                     test: /\.jsx?$/,
                     exclude: /node_modules/,
                     use: [
