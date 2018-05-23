@@ -9,6 +9,7 @@
     "dev": "webpack-dev-server --config config/webpack.dev.config.js --env.dev=true --open",
     "dev-dashboard": "webpack-dashboard -m webpack-dev-server --config config/webpack.dev.config.js --env.dev=true --open",
     "build": "webpack --config config/webpack.dev.config.js --env.dev=true",
+    "lint-js": "eslint src/**",
     "test": "test"
   },
   "dependencies": {
