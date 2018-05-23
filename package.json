@@ -10,6 +10,8 @@
     "dev-dashboard": "webpack-dashboard -m webpack-dev-server --config config/webpack.dev.config.js --env.dev=true --open",
     "build": "webpack --config config/webpack.dev.config.js --env.dev=true",
     "lint-js": "eslint src/**",
+    "lint-ts": "tslint --project ./tsconfig.json",
+    "lint-scripts": "eslint src/** tslint --project ./tsconfig.json",
     "test": "test"
   },
   "dependencies": {
@@ -64,6 +66,8 @@
     "ts-jest": "^22.4.6",
     "ts-loader": "^4.3.0",
     "tslint": "^5.10.0",
+    "tslint-config-airbnb": "^5.9.2",
+    "tslint-loader": "^3.6.0",
     "tslint-react": "^3.6.0",
     "typescript": "^2.8.3",
     "url-loader": "^1.0.1",
