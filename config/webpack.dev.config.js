@@ -19,10 +19,10 @@ module.exports = (env = {}) => {
             ]
         },
         output: {
-            path: `${PATHS.dist}/js`,
-            publicPath: "/",
-            filename: "[name].js",
-            chunkFilename: "chunk-[id].js",
+            path: `${PATHS.dist}`,
+            publicPath: "",
+            filename: "js/[name].js",
+            chunkFilename: "js/chunk-[id].js",
         },
         watch: true,
         devtool: "eval-source-map",
@@ -63,7 +63,7 @@ module.exports = (env = {}) => {
                                             browsers: VARS.supportedBrowsers,
                                         },
                                         useBuiltIns: VARS.useBabelPolyfill,
-                                        debug: true,
+                                        debug: false,
                                     }],
                                 ],
                                 plugins: [
@@ -81,11 +81,12 @@ module.exports = (env = {}) => {
                             loader: "babel-loader",
                             options: {
                                 presets: [
-                                    ["@babel/preset-env", {
+                                    ["@babel/env", {
                                         targets: {
                                             browsers: VARS.supportedBrowsers,
-                                            useBuiltIns: VARS.useBabelPolyfill,
                                         },
+                                        useBuiltIns: VARS.useBabelPolyfill,
+                                        debug: false,
                                     }],
                                 ],
                                 plugins: [
@@ -173,6 +174,35 @@ module.exports = (env = {}) => {
                             loader: "less-loader",
                             options: {
                                 sourceMap: VARS.useSourceMaps,
+                            },
+                        },
+                    ],
+                },
+                {
+                    test: /\.(jpg|png|svg)$/,
+                    include: /img/,
+                    exclude: /node_modules/,
+                    use: [
+                        {
+                            loader: "url-loader",
+                            options: {
+                                limit: 30000,
+                                name: "[name].[ext]",
+                                outputPath: "img",
+                            },
+                        },
+                    ],
+                },
+                {
+                    test: /\.(eot|woff|woff2|ttf|svg)$/,
+                    include: /font/,
+                    exclude: /node_modules/,
+                    use: [
+                        {
+                            loader: "file-loader",
+                            options: {
+                                name: "[name].[ext]",
+                                outputPath: "font"
                             },
                         },
                     ],
