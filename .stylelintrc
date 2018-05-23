@@ -1,0 +1,21 @@
+{
+  "extends": "stylelint-config-sass-guidelines",
+  "plugins": [
+    "stylelint-scss"
+  ],
+  "rules": {
+    "block-closing-brace-empty-line-before": "never",
+    "block-closing-brace-newline-before": "always-multi-line",
+    "block-closing-brace-newline-after": "always-multi-line",
+    "declaration-colon-space-after": "always",
+    "declaration-colon-space-before": "never",
+    "comment-empty-line-before": "always",
+    "no-missing-end-of-source-newline": true,
+    "indentation": 2,
+    "selector-max-compound-selectors": 3,
+    "selector-no-qualifying-type": [ true, {
+      "ignore": ["attribute", "class", "id"]
+    }],
+    "selector-class-pattern": null
+  }
+}
