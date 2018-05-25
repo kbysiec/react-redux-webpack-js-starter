@@ -12,10 +12,11 @@
     "lint-js": "eslint src/**",
     "lint-ts": "tslint --project ./tsconfig.json",
     "lint-scripts": "eslint src/** tslint --project ./tsconfig.json",
-    "lint-sass": "stylelint src/**/*.scss",
+    "lint-scss": "stylelint src/**/*.scss",
+    "lint-sass": "stylelint src/**/*.sass",
     "lint-less": "stylelint src/**/*.less",
     "lint-css": "stylelint src/**/*.css",
-    "lint-styles": "stylelint src/**/*.css src/**/*.scss src/**/*.less",
+    "lint-styles": "stylelint src/**/*.css src/**/*.scss src/**/*.sass src/**/*.less",
     "test": "test"
   },
   "dependencies": {
@@ -70,6 +71,7 @@
     "stylelint": "^9.2.1",
     "stylelint-config-sass-guidelines": "^5.0.0",
     "stylelint-scss": "^3.1.0",
+    "stylelint-webpack-plugin": "^0.10.5",
     "ts-jest": "^22.4.6",
     "ts-loader": "^4.3.0",
     "tslint": "^5.10.0",
