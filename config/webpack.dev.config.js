@@ -2,6 +2,8 @@ const webpack = require("webpack");
 const autoprefixer = require("autoprefixer");
 const DashboardPlugin = require("webpack-dashboard/plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const StyleLintPlugin = require('stylelint-webpack-plugin');
+
 const { configure } = require("./config.vars");
 
 module.exports = (env = {}) => {
@@ -262,6 +264,9 @@ module.exports = (env = {}) => {
             }),
             new HtmlWebpackPlugin({
                 template: `${PATHS.root}/index.html`,
+            }),
+            new StyleLintPlugin({
+                files: "**/*.(css|scss|sass|less)",
             }),
             // plugins: [
             //     new HtmlWebpackPlugin({
