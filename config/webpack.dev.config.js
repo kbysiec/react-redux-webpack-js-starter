@@ -137,6 +137,30 @@ module.exports = (env = {}) => {
                     ],
                 },
                 {
+                    test: /\.css$/,
+                    exclude: /node_modules/,
+                    use: [
+                        "style-loader",
+                        {
+                            loader: "css-loader",
+                            options: {
+                                sourceMap: VARS.useSourceMaps,
+                            },
+                        },
+                        {
+                            loader: "postcss-loader",
+                            options: {
+                                plugins: [
+                                    autoprefixer({
+                                        browsers: VARS.supportedBrowsers,
+                                    }),
+                                ],
+                                sourceMap: VARS.useSourceMaps,
+                            },
+                        },
+                    ],
+                },
+                {
                     test: /\.(scss|sass)$/,
                     exclude: /node_modules/,
                     use: [
@@ -153,7 +177,7 @@ module.exports = (env = {}) => {
                                 plugins: [
                                     autoprefixer({
                                         browsers: VARS.supportedBrowsers,
-                                    })
+                                    }),
                                 ],
                                 sourceMap: VARS.useSourceMaps,
                             },
@@ -183,7 +207,7 @@ module.exports = (env = {}) => {
                                 plugins: [
                                     autoprefixer({
                                         browsers: VARS.supportedBrowsers,
-                                    })
+                                    }),
                                 ],
                                 sourceMap: VARS.useSourceMaps,
                             },
