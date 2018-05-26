@@ -5,10 +5,11 @@
     "es6": true,
     "node": true
   },
-  "extends": "airbnb",
+  "extends": [
+    "airbnb"
+  ],
+  "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module"
-  },
-  "rules": {
   }
 }
