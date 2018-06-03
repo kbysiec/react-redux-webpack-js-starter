@@ -16,7 +16,8 @@
     "lint-sass": "stylelint src/**/*.sass",
     "lint-less": "stylelint src/**/*.less",
     "lint-css": "stylelint src/**/*.css",
-    "lint-styles": "stylelint src/**/*.css src/**/*.scss src/**/*.sass src/**/*.less",
+    "lint-styles": "stylelint src/**/*.{css,scss,sass,less}",
+    "pretty": "prettier --write src/**/*",
     "test": "test"
   },
   "dependencies": {
