@@ -3,10 +3,9 @@
     "module": "es2015",
     "target": "esnext",
     "moduleResolution": "node",
-    "noEmitOnError": true,
+    "noEmitOnError": true
     //    "sourceMap": true
   },
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"],
+  "typeRoots": ["./typings"]
 }
