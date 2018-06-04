@@ -1,279 +1,273 @@
-const webpack = require("webpack");
-const autoprefixer = require("autoprefixer");
-const DashboardPlugin = require("webpack-dashboard/plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
+const DashboardPlugin = require('webpack-dashboard/plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 
-const { configure } = require("./config.vars");
+const { configure } = require('./config.vars');
 
 module.exports = (env = {}) => {
-    const { PATHS, VARS } = configure(env);
-    console.dir(VARS);
+  const { PATHS, VARS } = configure(env);
+  console.dir(VARS);
 
-    return {
-        mode: "development",
-        cache: true,
-        context: PATHS.root,
-        entry: {
-            app: [
-                // "react-hot-loader/patch",
-                `${PATHS.src}/index.js`
-            ]
+  return {
+    mode: 'development',
+    cache: true,
+    context: PATHS.root,
+    entry: {
+      app: [
+        // "react-hot-loader/patch",
+        `${PATHS.src}/index.js`,
+      ],
+    },
+    output: {
+      path: `${PATHS.dist}`,
+      publicPath: '',
+      filename: 'js/[name].js',
+      chunkFilename: 'js/chunk-[id].js',
+    },
+    watch: true,
+    devtool: 'eval-source-map',
+    devServer: {
+      port: 9000,
+      hot: true,
+      hotOnly: true,
+      historyApiFallback: true,
+      overlay: true,
+    },
+    resolve: {
+      extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss', '.less', '.html', '.json'],
+      modules: ['src', 'node_modules'],
+    },
+    optimization: {
+      namedModules: true,
+      runtimeChunk: true /* "single" */,
+      splitChunks: {
+        chunks: 'all',
+        minSize: 10000,
+        maxAsyncRequests: 2,
+        maxInitialRequests: 2,
+        automaticNameDelimiter: '.',
+        cacheGroups: {
+          vendors: {
+            test: /[\\/]node_modules[\\/]/,
+            reuseExistingChunk: true,
+          },
         },
-        output: {
-            path: `${PATHS.dist}`,
-            publicPath: "",
-            filename: "js/[name].js",
-            chunkFilename: "js/chunk-[id].js",
+      },
+    },
+    module: {
+      rules: [
+        {
+          enforce: 'pre',
+          test: /\.jsx?$/,
+          exclude: /node_modules/,
+          use: 'eslint-loader',
         },
-        watch: true,
-        devtool: "eval-source-map",
-        devServer: {
-            port: 9000,
-            hot: true,
-            hotOnly: true,
-            historyApiFallback: true,
-            overlay: true,
-        },
-        resolve: {
-            extensions: [".js", ".jsx", ".ts", ".tsx", ".scss", ".sass", ".less", ".html", ".json"],
-            modules: ["src", "node_modules"],
-        },
-        optimization: {
-            splitChunks: {
-                chunks: "all",
-                minSize: 10000,
-                maxAsyncRequests: 2,
-                maxInitialRequests: 2,
-                automaticNameDelimiter: '.',
+        {
+          enforce: 'pre',
+          test: /\.tsx?$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'tslint-loader',
+            options: {
+              failOnHint: true,
+              emitErrors: false,
             },
-            namedModules: true,
-            runtimeChunk: true, /* "single" */
+          },
         },
-        module: {
-            rules: [
-                {
-                    enforce: "pre",
-                    test: /\.jsx?$/,
-                    exclude: /node_modules/,
-                    use: "eslint-loader",
-                },
-                {
-                    enforce: "pre",
-                    test: /\.tsx?$/,
-                    exclude: /node_modules/,
-                    use: {
-                        loader: "tslint-loader",
-                        options: {
-                            failOnHint: true,
-                            emitErrors: false,
-                        },
+        {
+          test: /\.jsx?$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: 'babel-loader',
+              options: {
+                presets: [
+                  [
+                    '@babel/env',
+                    {
+                      targets: {
+                        browsers: VARS.supportedBrowsers,
+                      },
+                      useBuiltIns: VARS.useBabelPolyfill,
+                      debug: false,
                     },
-                },
-                {
-                    test: /\.jsx?$/,
-                    exclude: /node_modules/,
-                    use: [
-                        {
-                            loader: "babel-loader",
-                            options: {
-                                presets: [
-                                    ["@babel/env", {
-                                        targets: {
-                                            browsers: VARS.supportedBrowsers,
-                                        },
-                                        useBuiltIns: VARS.useBabelPolyfill,
-                                        debug: false,
-                                    }],
-                                ],
-                                plugins: [
-                                    "@babel/plugin-syntax-dynamic-import",
-                                ],
-                            },
-                        },
-                    ],
-                },
-                {
-                    test: /\.tsx?$/,
-                    exclude: /node_modules/,
-                    use: [
-                        {
-                            loader: "babel-loader",
-                            options: {
-                                presets: [
-                                    ["@babel/env", {
-                                        targets: {
-                                            browsers: VARS.supportedBrowsers,
-                                        },
-                                        useBuiltIns: VARS.useBabelPolyfill,
-                                        debug: false,
-                                    }],
-                                ],
-                                plugins: [
-                                    "@babel/plugin-syntax-dynamic-import",
-                                ],
-                            },
-                        },
-                        VARS.useAwesomeLoader ?
-                            {
-                                loader: "awesome-typescript-loader",
-                                options: {
-                                    transpileOnly: true,
-                                    useBabel: true,
-                                    useTranspileModule: false,
-                                    sourceMap: VARS.useSourceMaps,
-                                },
-                            } :
-                            {
-                                loader: "ts-loader",
-                                options: {
-                                    transpileOnly: true,
-                                    compilerOptions: {
-                                        sourceMap: VARS.useSourceMaps,
-                                        // target: VARS.isDev ? "es2015" : "es5",
-                                        // isolatedModules: true,
-                                        // noEmitOnError: false,
-                                    },
-                                },
-                            },
-                    ],
-                },
-                {
-                    test: /\.css$/,
-                    exclude: /node_modules/,
-                    use: [
-                        "style-loader",
-                        {
-                            loader: "css-loader",
-                            options: {
-                                sourceMap: VARS.useSourceMaps,
-                            },
-                        },
-                        {
-                            loader: "postcss-loader",
-                            options: {
-                                plugins: [
-                                    autoprefixer({
-                                        browsers: VARS.supportedBrowsers,
-                                    }),
-                                ],
-                                sourceMap: VARS.useSourceMaps,
-                            },
-                        },
-                    ],
-                },
-                {
-                    test: /\.(scss|sass)$/,
-                    exclude: /node_modules/,
-                    use: [
-                        "style-loader",
-                        {
-                            loader: "css-loader",
-                            options: {
-                                sourceMap: VARS.useSourceMaps,
-                            },
-                        },
-                        {
-                            loader: "postcss-loader",
-                            options: {
-                                plugins: [
-                                    autoprefixer({
-                                        browsers: VARS.supportedBrowsers,
-                                    }),
-                                ],
-                                sourceMap: VARS.useSourceMaps,
-                            },
-                        },
-                        {
-                            loader: "sass-loader",
-                            options: {
-                                sourceMap: VARS.useSourceMaps,
-                            },
-                        },
-                    ],
-                },
-                {
-                    test: /\.less$/,
-                    exclude: /node_modules/,
-                    use: [
-                        "style-loader",
-                        {
-                            loader: "css-loader",
-                            options: {
-                                sourceMap: VARS.useSourceMaps,
-                            },
-                        },
-                        {
-                            loader: "postcss-loader",
-                            options: {
-                                plugins: [
-                                    autoprefixer({
-                                        browsers: VARS.supportedBrowsers,
-                                    }),
-                                ],
-                                sourceMap: VARS.useSourceMaps,
-                            },
-                        },
-                        {
-                            loader: "less-loader",
-                            options: {
-                                sourceMap: VARS.useSourceMaps,
-                            },
-                        },
-                    ],
-                },
-                {
-                    test: /\.(jpg|png|svg)$/,
-                    include: /img/,
-                    exclude: /node_modules/,
-                    use: [
-                        {
-                            loader: "url-loader",
-                            options: {
-                                limit: 30000,
-                                name: "[name].[ext]",
-                                outputPath: "img",
-                            },
-                        },
-                    ],
-                },
-                {
-                    test: /\.(eot|woff|woff2|ttf|svg)$/,
-                    include: /font/,
-                    exclude: /node_modules/,
-                    use: [
-                        {
-                            loader: "file-loader",
-                            options: {
-                                name: "[name].[ext]",
-                                outputPath: "font"
-                            },
-                        },
-                    ],
-                },
-            ],
+                  ],
+                ],
+                plugins: ['@babel/plugin-syntax-dynamic-import'],
+              },
+            },
+          ],
         },
-        plugins:[
-            new webpack.DefinePlugin({
-                "process.env": {
-                    NODE_ENV: JSON.stringify("development"),
+        {
+          test: /\.tsx?$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: 'babel-loader',
+              options: {
+                presets: [
+                  [
+                    '@babel/env',
+                    {
+                      targets: {
+                        browsers: VARS.supportedBrowsers,
+                      },
+                      useBuiltIns: VARS.useBabelPolyfill,
+                      debug: false,
+                    },
+                  ],
+                ],
+                plugins: ['@babel/plugin-syntax-dynamic-import'],
+              },
+            },
+            VARS.useAwesomeLoader
+              ? {
+                loader: 'awesome-typescript-loader',
+                options: {
+                  transpileOnly: true,
+                  useBabel: true,
+                  useTranspileModule: false,
+                  sourceMap: VARS.useSourceMaps,
                 },
-            }),
-            new DashboardPlugin(),
-            new webpack.HotModuleReplacementPlugin({
-            }),
-            new HtmlWebpackPlugin({
-                template: `${PATHS.root}/index.html`,
-            }),
-            new StyleLintPlugin({
-                files: "**/*.(css|scss|sass|less)",
-            }),
-            // plugins: [
-            //     new HtmlWebpackPlugin({
-            //         template: `${PATHS.root}/index.html`,
-            //         filename: `${PATHS.dist}/index.html`,
-            //     }),
-            // ],
-        ],
-    };
+              }
+              : {
+                loader: 'ts-loader',
+                options: {
+                  transpileOnly: true,
+                  compilerOptions: {
+                    sourceMap: VARS.useSourceMaps,
+                  },
+                },
+              },
+          ],
+        },
+        {
+          test: /\.css$/,
+          exclude: /node_modules/,
+          use: [
+            'style-loader',
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: VARS.useSourceMaps,
+              },
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: [
+                  autoprefixer({
+                    browsers: VARS.supportedBrowsers,
+                  }),
+                ],
+                sourceMap: VARS.useSourceMaps,
+              },
+            },
+          ],
+        },
+        {
+          test: /\.scss$/,
+          exclude: /node_modules/,
+          use: [
+            'style-loader',
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: VARS.useSourceMaps,
+              },
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: [
+                  autoprefixer({
+                    browsers: VARS.supportedBrowsers,
+                  }),
+                ],
+                sourceMap: VARS.useSourceMaps,
+              },
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                sourceMap: VARS.useSourceMaps,
+              },
+            },
+          ],
+        },
+        {
+          test: /\.less$/,
+          exclude: /node_modules/,
+          use: [
+            'style-loader',
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: VARS.useSourceMaps,
+              },
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: [
+                  autoprefixer({
+                    browsers: VARS.supportedBrowsers,
+                  }),
+                ],
+                sourceMap: VARS.useSourceMaps,
+              },
+            },
+            {
+              loader: 'less-loader',
+              options: {
+                sourceMap: VARS.useSourceMaps,
+              },
+            },
+          ],
+        },
+        {
+          test: /\.(jpg|png|svg)$/,
+          include: /img/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: 'url-loader',
+              options: {
+                limit: 30000,
+                name: '[name].[ext]',
+                outputPath: 'img',
+              },
+            },
+          ],
+        },
+        {
+          test: /\.(eot|woff|woff2|ttf|svg)$/,
+          include: /font/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: '[name].[ext]',
+                outputPath: 'font',
+              },
+            },
+          ],
+        },
+      ],
+    },
+    plugins: [
+      new DashboardPlugin(),
+      new webpack.HotModuleReplacementPlugin({}),
+      new webpack.NamedModulesPlugin(),
+      new HtmlWebpackPlugin({
+        template: `${PATHS.root}/index.html`,
+      }),
+      new StyleLintPlugin({
+        files: 'src/**/*.(css|scss|less)',
+      }),
+    ],
+  };
 };
