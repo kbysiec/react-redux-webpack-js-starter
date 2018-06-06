@@ -16,7 +16,6 @@ module.exports = (env = {}) => {
     context: PATHS.root,
     entry: {
       app: [
-        // "react-hot-loader/patch",
         `${PATHS.src}/index.js`,
       ],
     },
@@ -24,7 +23,7 @@ module.exports = (env = {}) => {
       path: `${PATHS.dist}`,
       publicPath: '',
       filename: 'js/[name].js',
-      chunkFilename: 'js/chunk-[id].js',
+      chunkFilename: 'js/[name].js',
     },
     watch: true,
     devtool: 'eval-source-map',
@@ -43,13 +42,12 @@ module.exports = (env = {}) => {
       namedModules: true,
       runtimeChunk: true /* "single" */,
       splitChunks: {
-        chunks: 'all',
         minSize: 10000,
         maxAsyncRequests: 2,
         maxInitialRequests: 2,
-        automaticNameDelimiter: '.',
         cacheGroups: {
           vendors: {
+            chunks: 'all',
             test: /[\\/]node_modules[\\/]/,
             reuseExistingChunk: true,
           },
@@ -94,8 +92,12 @@ module.exports = (env = {}) => {
                       debug: false,
                     },
                   ],
+                  '@babel/react',
                 ],
-                plugins: ['@babel/plugin-syntax-dynamic-import'],
+                plugins: [
+                  '@babel/plugin-syntax-dynamic-import',
+                  'react-hot-loader/babel',
+                ],
               },
             },
           ],
@@ -119,7 +121,10 @@ module.exports = (env = {}) => {
                     },
                   ],
                 ],
-                plugins: ['@babel/plugin-syntax-dynamic-import'],
+                plugins: [
+                  '@babel/plugin-syntax-dynamic-import',
+                  'react-hot-loader/babel',
+                ],
               },
             },
             VARS.useAwesomeLoader
