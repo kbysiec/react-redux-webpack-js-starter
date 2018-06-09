@@ -5,11 +5,14 @@
     "es6": true,
     "node": true
   },
-  "extends": [
-    "airbnb"
-  ],
+  "extends": ["airbnb"],
   "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module"
+  },
+  "rules": {
+    "jsx-a11y/anchor-is-valid": ["error", { "components": ["Link"], "specialLink": ["to"] }],
+    "react/jsx-filename-extension": 1,
+    "global-require": 1
   }
 }
