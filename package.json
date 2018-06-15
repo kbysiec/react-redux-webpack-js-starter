@@ -7,7 +7,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "webpack-dev-server --config config/webpack.dev.config.js --open",
-    "dev:dashboard": "webpack-dashboard -m webpack-dev-server --config config/webpack.dev.config.js --open",
+    "dev:dashboard": "webpack-dashboard -m -- webpack-dev-server --config config/webpack.dev.config.js --env.dashboard=true --open",
     "build": "webpack --config config/webpack.prod.config.js",
     "lint:scripts": "eslint src/** tslint --project ./tsconfig.json",
     "lint:styles": "stylelint src/**/*.{css,scss,less}",
@@ -94,7 +94,7 @@
     "webpack": "^4.8.3",
     "webpack-bundle-analyzer": "^2.13.1",
     "webpack-cli": "^2.1.3",
-    "webpack-dashboard": "^1.1.1",
+    "webpack-dashboard": "^2.0.0",
     "webpack-dev-server": "^3.1.4"
   }
 }

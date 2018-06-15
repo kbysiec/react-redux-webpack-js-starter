@@ -15,9 +15,7 @@ module.exports = (env = {}) => {
     cache: true,
     context: PATHS.root,
     entry: {
-      app: [
-        `${PATHS.src}/index.js`,
-      ],
+      app: [`${PATHS.src}/index.jsx`],
     },
     output: {
       path: `${PATHS.dist}`,
@@ -89,15 +87,13 @@ module.exports = (env = {}) => {
                         browsers: VARS.supportedBrowsers,
                       },
                       useBuiltIns: VARS.useBabelPolyfill,
+                      cacheDirectory: true,
                       debug: false,
                     },
                   ],
                   '@babel/react',
                 ],
-                plugins: [
-                  '@babel/plugin-syntax-dynamic-import',
-                  'react-hot-loader/babel',
-                ],
+                plugins: ['@babel/plugin-syntax-dynamic-import', 'react-hot-loader/babel'],
               },
             },
           ],
@@ -117,14 +113,12 @@ module.exports = (env = {}) => {
                         browsers: VARS.supportedBrowsers,
                       },
                       useBuiltIns: VARS.useBabelPolyfill,
+                      cacheDirectory: true,
                       debug: false,
                     },
                   ],
                 ],
-                plugins: [
-                  '@babel/plugin-syntax-dynamic-import',
-                  'react-hot-loader/babel',
-                ],
+                plugins: ['@babel/plugin-syntax-dynamic-import', 'react-hot-loader/babel'],
               },
             },
             VARS.useAwesomeLoader
@@ -264,7 +258,6 @@ module.exports = (env = {}) => {
       ],
     },
     plugins: [
-      new DashboardPlugin(),
       new webpack.HotModuleReplacementPlugin({}),
       new webpack.NamedModulesPlugin(),
       new HtmlWebpackPlugin({
@@ -273,6 +266,7 @@ module.exports = (env = {}) => {
       new StyleLintPlugin({
         files: 'src/**/*.(css|scss|less)',
       }),
+      ...(VARS.useDashboard ? [new DashboardPlugin()] : []),
     ],
   };
 };

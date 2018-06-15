@@ -8,6 +8,7 @@ const projectConfigPaths = {
 
 const projectConfigVars = {};
 const projectConfigVarsDefaults = {
+  useDashboard: false,
   useBabelPolyfill: 'entry',
   useSourceMaps: true,
   useAwesomeLoader: false,
@@ -16,6 +17,9 @@ const projectConfigVarsDefaults = {
 
 const configure = function (env) {
   Object.assign(projectConfigVars, {
+    useDashboard: env.dashboard
+      ? env.dashboard == 'true'
+      : projectConfigVarsDefaults.useDashboard,
     useBabelPolyfill: env.babelPolyfill
       ? env.babelPolyfill
       : projectConfigVarsDefaults.useBabelPolyfill,

@@ -8,6 +8,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const StyleLintPlugin = require('stylelint-webpack-plugin');
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 const { configure } = require('./config.vars');
 
@@ -20,7 +21,7 @@ module.exports = (env = {}) => {
     cache: true,
     context: PATHS.root,
     entry: {
-      app: [`${PATHS.src}/index.js`],
+      app: [`${PATHS.src}/index.jsx`],
     },
     output: {
       path: `${PATHS.dist}`,
@@ -93,6 +94,7 @@ module.exports = (env = {}) => {
                         browsers: VARS.supportedBrowsers,
                       },
                       useBuiltIns: VARS.useBabelPolyfill,
+                      cacheDirectory: true,
                       debug: false,
                     },
                   ],
@@ -118,6 +120,7 @@ module.exports = (env = {}) => {
                         browsers: VARS.supportedBrowsers,
                       },
                       useBuiltIns: VARS.useBabelPolyfill,
+                      cacheDirectory: true,
                       debug: false,
                     },
                   ],
@@ -297,6 +300,7 @@ module.exports = (env = {}) => {
         filename: 'css/[name].css',
         chunkFilename: 'css/[name].css',
       }),
+      // new HardSourceWebpackPlugin(),
     ],
   };
 };
