@@ -17,7 +17,10 @@
     "lint:less": "stylelint src/**/*.less",
     "lint:css": "stylelint src/**/*.css",
     "pretty": "prettier --write src/**/*",
-    "test": "test"
+    "test": "jest --config jest.json",
+    "test:details": "jest --config jest.json --coverage ",
+    "test:watch": "jest --config jest.json --watch",
+    "test:update": "jest --config jest.json -u"
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0-beta.47",

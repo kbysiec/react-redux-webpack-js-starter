@@ -1,0 +1,15 @@
+{
+  "verbose": true,
+  "moduleFileExtensions": ["ts", "tsx", "js", "jsx"],
+  "transform": {
+    "^.+\\.jsx?$": "./config/jest.babel.processor.setup.js",
+    "^.+\\.tsx?$": "ts-jest"
+  },
+  "testRegex": "/__tests__/(\\w+.)?(test|spec).(jsx?|tsx?)$",
+  "testPathIgnorePatterns": ["/node_modules/", "/config/", "/typings/", "/dist/"],
+  "globals": {
+    "window": {}
+  },
+  "setupTestFrameworkScriptFile": "./config/jest.framework.setup.js",
+  "setupFiles": ["./config/jest.stubs.setup.js"]
+}
