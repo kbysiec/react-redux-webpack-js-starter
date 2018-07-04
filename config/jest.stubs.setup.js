@@ -5,7 +5,7 @@ window.localStorage = {
 
 window.matchMedia =
   window.matchMedia ||
-  function () {
+  function() {
     return {
       matches: false,
       addListener() {},
@@ -13,6 +13,6 @@ window.matchMedia =
     };
   };
 
-window.requestAnimationFrame = function (callback) {
+window.requestAnimationFrame = function(callback) {
   setTimeout(callback);
 };
