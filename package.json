@@ -9,7 +9,7 @@
     "dev": "webpack-dev-server --config config/webpack.dev.config.js --open",
     "dev:dashboard": "webpack-dashboard -m -- webpack-dev-server --config config/webpack.dev.config.js --env.dashboard=true --open",
     "build": "webpack --config config/webpack.prod.config.js",
-    "lint:scripts": "eslint src/** tslint --project ./tsconfig.json",
+    "lint:scripts": "eslint src/** && tslint --project ./tsconfig.json",
     "lint:styles": "stylelint src/**/*.{css,scss,less}",
     "lint:js": "eslint src/**",
     "lint:ts": "tslint --project ./tsconfig.json",
@@ -18,12 +18,13 @@
     "lint:css": "stylelint src/**/*.css",
     "pretty": "prettier --write src/**/*",
     "test": "jest --config jest.json",
-    "test:details": "jest --config jest.json --coverage",
+    "test:details": "jest --config jest.json --coverage --no-cache",
     "test:watch": "jest --config jest.json --watch",
     "test:update": "jest --config jest.json -u"
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0-beta.51",
+    "@babel/runtime": "^7.0.0-beta.51",
     "axios": "^0.18.0",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
@@ -39,6 +40,7 @@
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.51",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0-beta.51",
+    "@babel/plugin-transform-runtime": "^7.0.0-beta.51",
     "@babel/preset-env": "^7.0.0-beta.51",
     "@babel/preset-react": "^7.0.0-beta.51",
     "@types/enzyme": "^3.1.10",
