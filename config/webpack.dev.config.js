@@ -33,7 +33,16 @@ module.exports = (env = {}) => {
       overlay: true,
     },
     resolve: {
-      extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss', '.less', '.html', '.json'],
+      extensions: [
+        '.js',
+        '.jsx',
+        '.ts',
+        '.tsx',
+        '.scss',
+        '.less',
+        '.html',
+        '.json',
+      ],
       modules: ['src', 'node_modules'],
     },
     optimization: {
@@ -87,13 +96,16 @@ module.exports = (env = {}) => {
                         browsers: VARS.supportedBrowsers,
                       },
                       useBuiltIns: VARS.useBabelPolyfill,
-                      cacheDirectory: true,
                       debug: false,
                     },
                   ],
                   '@babel/react',
                 ],
-                plugins: ['@babel/plugin-syntax-dynamic-import', 'react-hot-loader/babel'],
+                plugins: [
+                  '@babel/plugin-syntax-dynamic-import',
+                  'react-hot-loader/babel',
+                ],
+                cacheDirectory: true,
               },
             },
           ],
@@ -113,33 +125,36 @@ module.exports = (env = {}) => {
                         browsers: VARS.supportedBrowsers,
                       },
                       useBuiltIns: VARS.useBabelPolyfill,
-                      cacheDirectory: true,
                       debug: false,
                     },
                   ],
                 ],
-                plugins: ['@babel/plugin-syntax-dynamic-import', 'react-hot-loader/babel'],
+                plugins: [
+                  '@babel/plugin-syntax-dynamic-import',
+                  'react-hot-loader/babel',
+                ],
+                cacheDirectory: true,
               },
             },
             VARS.useAwesomeLoader
               ? {
-                loader: 'awesome-typescript-loader',
-                options: {
-                  transpileOnly: true,
-                  useBabel: true,
-                  useTranspileModule: false,
-                  sourceMap: VARS.useSourceMaps,
-                },
-              }
-              : {
-                loader: 'ts-loader',
-                options: {
-                  transpileOnly: true,
-                  compilerOptions: {
+                  loader: 'awesome-typescript-loader',
+                  options: {
+                    transpileOnly: true,
+                    useBabel: true,
+                    useTranspileModule: false,
                     sourceMap: VARS.useSourceMaps,
                   },
+                }
+              : {
+                  loader: 'ts-loader',
+                  options: {
+                    transpileOnly: true,
+                    compilerOptions: {
+                      sourceMap: VARS.useSourceMaps,
+                    },
+                  },
                 },
-              },
           ],
         },
         {
