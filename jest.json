@@ -6,11 +6,31 @@
     "^.+\\.tsx?$": "ts-jest"
   },
   "testRegex": "/__tests__/(\\w+.)?(test|spec).(jsx?|tsx?)$",
-  "testPathIgnorePatterns": ["/node_modules/", "/config/", "/typings/", "/dist/"],
-  "coveragePathIgnorePatterns": ["/node_modules/", "/config/", "/typings/", "/dist/"],
+  "testPathIgnorePatterns": [
+    "/node_modules/",
+    "/config/",
+    "/typings/",
+    "/dist/"
+  ],
+  "coveragePathIgnorePatterns": [
+    "/node_modules/",
+    "/config/",
+    "/typings/",
+    "/dist/"
+  ],
+  "modulePathIgnorePatterns": [
+    "/node_modules/",
+    "/config/",
+    "/typings/",
+    "/dist/"
+  ],
   "globals": {
     "window": {}
   },
   "setupTestFrameworkScriptFile": "./config/jest.framework.setup.js",
-  "setupFiles": ["./config/jest.stubs.setup.js"]
+  "setupFiles": ["./config/jest.stubs.setup.js"],
+  "moduleNameMapper": {
+    "\\.(css|scss|less|jpg|png|svg|eot|woff|woff2|ttf)$": "identity-obj-proxy"
+  },
+  "coverageReporters": ["json", "lcov", "text", "html"]
 }
