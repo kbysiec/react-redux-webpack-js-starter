@@ -6,13 +6,18 @@
     "node": true,
     "jest": true
   },
-  "extends": ["airbnb"],
+  "extends": ["airbnb", "prettier"],
   "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module"
   },
+  "plugins": ["prettier"],
   "rules": {
-    "jsx-a11y/anchor-is-valid": ["error", { "components": ["Link"], "specialLink": ["to"] }],
+    "prettier/prettier": ["error"],
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      { "components": ["Link"], "specialLink": ["to"] }
+    ],
     "react/jsx-filename-extension": 1,
     "global-require": 1
   }
