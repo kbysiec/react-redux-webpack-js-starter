@@ -16,3 +16,6 @@ window.matchMedia =
 window.requestAnimationFrame = function(callback) {
   setTimeout(callback);
 };
+
+module.exports = 'file-stub';
+export default 'file-stub';
