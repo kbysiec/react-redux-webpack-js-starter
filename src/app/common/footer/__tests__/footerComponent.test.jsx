@@ -17,8 +17,8 @@ describe('common / footer / FooterComponent', () => {
     expect(component).toMatchSnapshot();
   });
 
-  test('should contains elements with "footer" and "footer-link" class', () => {
+  test('should contains elements with "footer" and "footer-link-logo" class', () => {
     expect(component.find('div.footer').length).toEqual(1);
-    expect(component.find('a.footer-link').length).toEqual(1);
+    expect(component.find('img.footer-link-logo').length).toEqual(1);
   });
 });

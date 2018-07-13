@@ -4,17 +4,18 @@ import './footer.scss';
 
 const FooterComponent = () => (
   <div className="footer">
-    <p>
-      Created by Kamil Bysiec from{' '}
-      <a
-        href="https://agileplayers.com"
-        className="footer-link"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Agile Players
-      </a>
-    </p>
+    <p className="footer-paragraph">Created by Kamil Bysiec from </p>
+    <a
+      href="https://agileplayers.com"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <img
+        src="https://agileplayers.com/Static/dist/img/logo_full.svg"
+        alt="agile players logo"
+        className="footer-link-logo"
+      />
+    </a>
   </div>
 );
 
