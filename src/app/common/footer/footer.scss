@@ -1,0 +1,23 @@
+.footer {
+  background-color: #000;
+  bottom: 0;
+  box-shadow: 0 0 0.8em 1.2em #000;
+  color: #fff;
+  font-size: 1.1em;
+  height: 4em;
+  letter-spacing: 2px;
+  margin-top: 1.2em;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+}
+
+.footer-link {
+  color: #a8bce4;
+  text-decoration: none;
+  transition: 0.3s all ease;
+
+  &:hover {
+    color: #ff5900;
+  }
+}
