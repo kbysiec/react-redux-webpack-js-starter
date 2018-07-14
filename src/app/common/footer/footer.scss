@@ -1,3 +1,16 @@
+@font-face {
+  font-family: 'GelPenHeavy';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./_assets/font/gelpen/GelPenHeavy.eot');
+  src: url('./_assets/font/gelpen/GelPenHeavy.woff2') format('woff2'),
+    url('./_assets/font/gelpen/GelPenHeavy.woff') format('woff'),
+    url('./_assets/font/gelpen/GelPenHeavy.ttf') format('truetype'),
+    url('./_assets/font/gelpen/GelPenHeavy.svg#GelPenHeavy') format('svg'),
+    url('./_assets/font/gelpen/GelPenHeavy.eot?#iefix')
+    format('embedded-opentype');
+}
+
 .footer {
   background-color: #000;
   bottom: 0;
@@ -14,6 +27,12 @@
 
 .footer-paragraph {
   display: inline-block;
+}
+
+.footer-text-handwritten {
+  color: #ff5900;
+  font-family: GelPenHeavy, Arial, Helvetica, sans-serif;
+  margin: 0 0.5em;
 }
 
 .footer-link-logo {

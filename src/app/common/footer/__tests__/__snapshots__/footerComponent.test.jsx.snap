@@ -21,7 +21,13 @@ ShallowWrapper {
         <p
           className="footer-paragraph"
         >
-          Created by Kamil Bysiec from 
+          Created by
+          <span
+            className="footer-text-handwritten"
+          >
+            Kamil Bysiec
+          </span>
+           from
         </p>,
         <a
           href="https://agileplayers.com"
@@ -44,11 +50,34 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": "Created by Kamil Bysiec from ",
+          "children": Array [
+            "Created by",
+            <span
+              className="footer-text-handwritten"
+            >
+              Kamil Bysiec
+            </span>,
+            " from",
+          ],
           "className": "footer-paragraph",
         },
         "ref": null,
-        "rendered": "Created by Kamil Bysiec from ",
+        "rendered": Array [
+          "Created by",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Kamil Bysiec",
+              "className": "footer-text-handwritten",
+            },
+            "ref": null,
+            "rendered": "Kamil Bysiec",
+            "type": "span",
+          },
+          " from",
+        ],
         "type": "p",
       },
       Object {
@@ -94,7 +123,13 @@ ShallowWrapper {
           <p
             className="footer-paragraph"
           >
-            Created by Kamil Bysiec from 
+            Created by
+            <span
+              className="footer-text-handwritten"
+            >
+              Kamil Bysiec
+            </span>
+             from
           </p>,
           <a
             href="https://agileplayers.com"
@@ -117,11 +152,34 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": "Created by Kamil Bysiec from ",
+            "children": Array [
+              "Created by",
+              <span
+                className="footer-text-handwritten"
+              >
+                Kamil Bysiec
+              </span>,
+              " from",
+            ],
             "className": "footer-paragraph",
           },
           "ref": null,
-          "rendered": "Created by Kamil Bysiec from ",
+          "rendered": Array [
+            "Created by",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Kamil Bysiec",
+                "className": "footer-text-handwritten",
+              },
+              "ref": null,
+              "rendered": "Kamil Bysiec",
+              "type": "span",
+            },
+            " from",
+          ],
           "type": "p",
         },
         Object {

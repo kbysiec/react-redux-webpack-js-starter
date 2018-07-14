@@ -4,7 +4,10 @@ import './footer.scss';
 
 const FooterComponent = () => (
   <div className="footer">
-    <p className="footer-paragraph">Created by Kamil Bysiec from </p>
+    <p className="footer-paragraph">
+      Created by
+      <span className="footer-text-handwritten">Kamil Bysiec</span> from
+    </p>
     <a
       href="https://agileplayers.com"
       target="_blank"
