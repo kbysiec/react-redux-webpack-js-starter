@@ -15,7 +15,7 @@ const projectConfigVarsDefaults = {
   supportedBrowsers: ['>0.25%'],
 };
 
-const configure = function (env) {
+const configure = function(env) {
   Object.assign(projectConfigVars, {
     useDashboard: env.dashboard
       ? env.dashboard == 'true'
