@@ -2,7 +2,7 @@ const path = require('path');
 
 const projectConfigPaths = {
   root: path.resolve(__dirname, '..'),
-  src: path.resolve(__dirname, '../src'),
+  src: path.resolve(__dirname, '../src-ts'),
   dist: path.resolve(__dirname, '../dist'),
 };
 
