@@ -1,7 +1,7 @@
 import React from 'react';
 import './counter.scss';
 
-interface CounterComponentProps {
+export interface CounterComponentProps {
   counter: number;
   incrementCounter(value: number): number;
 }
