@@ -1,18 +1,27 @@
 import { connect } from 'react-redux';
 import CounterComponent from './CounterComponent';
-import { counterOperations } from './_duck';
+import { counterOperations, CounterThunkDispatch } from './_duck';
+import { ApplicationState } from '../../../_duck/types';
+interface PropsFromState {
+  counter: number;
+}
 
-export const mapStateToProps = state => state.counter;
-// export const mapStateToProps = state => ({
-//   counter: state.counter,
-// });
+interface PropsFromDispatch {
+  incrementCounter(value: number): void;
+}
 
-export const mapDispatchToProps = dispatch => ({
-  incrementCounter: value =>
-    dispatch(counterOperations.incrementCounter(value)),
+// export const mapStateToProps = (state: counterState) => state.counter;
+export const mapStateToProps = (state: ApplicationState) => ({
+  counter: state.counter.value,
 });
 
-const CounterContainer = connect(
+export const mapDispatchToProps = (dispatch: CounterThunkDispatch) => ({
+  incrementCounter: (value: number) => {
+    dispatch(counterOperations.incrementCounter(value));
+  },
+});
+
+const CounterContainer = connect<PropsFromState, PropsFromDispatch>(
   mapStateToProps,
   mapDispatchToProps,
 )(CounterComponent);

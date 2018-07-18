@@ -3,8 +3,8 @@ import operations from '../_duck/operations';
 
 describe('home / counter / container functions', () => {
   test('should mapStateToProps have counter prop', () => {
-    const initialState = { counter: 0 };
-    expect(mapStateToProps(initialState)).toEqual(0);
+    const initialState = { counter: { value: 0 } };
+    expect(mapStateToProps(initialState)).toEqual({ counter: 0 });
   });
 
   test('should mapDispatchToProps call sth', () => {

@@ -1,5 +1,7 @@
 import counterReducer from './reducers';
 
-export { default as counterTypes } from './types';
+export { CounterTypes } from './types';
+export { CounterState } from './types';
+export { CounterThunkDispatch } from './types';
 export { default as counterOperations } from './operations';
 export default counterReducer;

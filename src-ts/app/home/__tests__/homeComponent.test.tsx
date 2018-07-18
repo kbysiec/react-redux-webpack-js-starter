@@ -1,9 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 import HomeComponent from '../HomeComponent';
 
 describe('home / HomeComponent', () => {
-  let component;
+  let component: ShallowWrapper;
 
   beforeEach(() => {
     component = shallow(<HomeComponent />);

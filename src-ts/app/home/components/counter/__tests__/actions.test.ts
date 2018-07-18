@@ -1,8 +1,10 @@
 import actions from '../_duck/actions';
-import types from '../_duck/types';
+import { CounterTypes } from '../_duck/';
 
 jest.mock('../_duck/types', () => ({
-  INCREMENT_COUNTER: 'INCREMENT_COUNTER',
+  CounterTypes: {
+    INCREMENT_COUNTER: 'INCREMENT_COUNTER',
+  },
 }));
 
 describe('home / counter / duck / actions', () => {
@@ -16,7 +18,7 @@ describe('home / counter / duck / actions', () => {
 
   test('should create an action with type INCREMENT_COUNTER', () => {
     const expectedAction = {
-      type: types.INCREMENT_COUNTER,
+      type: CounterTypes.INCREMENT_COUNTER,
       payload: 2,
     };
     expect(actions.incrementCounter(2)).toEqual(expectedAction);

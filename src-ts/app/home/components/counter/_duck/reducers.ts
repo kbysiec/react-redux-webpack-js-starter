@@ -1,15 +1,19 @@
-import types from './types';
+import { Reducer } from 'redux';
+import { CounterTypes, CounterState } from './types';
 
-const INITIAL_STATE = {
-  counter: 0,
+const INITIAL_STATE: CounterState = {
+  value: 0,
 };
 
-const counterReducer = (state = INITIAL_STATE, action = {}) => {
+const counterReducer: Reducer<CounterState> = (
+  state = INITIAL_STATE,
+  action,
+) => {
   switch (action.type) {
-    case types.INCREMENT_COUNTER: {
+    case CounterTypes.INCREMENT_COUNTER: {
       return {
         ...state,
-        counter: action.payload,
+        value: action.payload,
       };
     }
     default:

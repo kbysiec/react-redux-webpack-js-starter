@@ -19,8 +19,7 @@ describe('home / counter / duck / operations', () => {
         payload: 2,
       },
     ];
-
-    store.dispatch(operations.incrementCounter(2));
+    store.dispatch(operations.incrementCounter(2) as any);
     const actions = store.getActions();
     expect(actions).toEqual(expectedActions);
   });

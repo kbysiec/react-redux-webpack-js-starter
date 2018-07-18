@@ -1,8 +1,8 @@
-import { counterTypes, counterOperations } from '../_duck/index';
+import { CounterTypes, counterOperations } from '../_duck/index';
 
 describe('home / counter / duck / index', () => {
   test('should counterTypes and counterOperations exist', () => {
-    expect(counterTypes).toBeDefined();
+    expect(CounterTypes).toBeDefined();
     expect(counterOperations).toBeDefined();
   });
 });

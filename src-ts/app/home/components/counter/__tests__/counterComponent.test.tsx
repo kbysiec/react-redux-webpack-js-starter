@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 // import { spy } from 'sinon';
-import CounterComponent from '../CounterComponent';
+import CounterComponent, { CounterComponentProps } from '../CounterComponent';
 
 describe('home / counter / CounterComponent', () => {
   let component;
-  let props;
+  let props: CounterComponentProps;
 
   beforeEach(() => {
     props = {
@@ -58,7 +58,7 @@ describe('home / counter / CounterComponent', () => {
     jest.clearAllTimers();
   });
 
-  test('should incrementCounter prop function to be stopped calling after component unmounting', () => {
+  test('should incrementCounter prop function stop calling after component unmounting', () => {
     jest.useFakeTimers();
     component = mount(<CounterComponent {...props} />);
     component.unmount();
