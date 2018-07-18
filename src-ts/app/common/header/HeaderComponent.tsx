@@ -1,8 +1,7 @@
 import React from 'react';
 import NavbarComponent from './components/navbar/NavbarComponent';
 import './header.scss';
-// import logo from './_assets/img/react.svg';
-const logo = require('./_assets/img/react.svg');
+import logo from './_assets/img/react.svg';
 
 const HeaderComponent: React.SFC = () => (
   <div className="header-wrapper">
