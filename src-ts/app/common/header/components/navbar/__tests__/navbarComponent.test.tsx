@@ -1,9 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 import NavbarComponent from '../NavbarComponent';
 
 describe('common / navbar / NavbarComponent', () => {
-  let component;
+  let component: ShallowWrapper;
 
   beforeEach(() => {
     component = shallow(<NavbarComponent />);
