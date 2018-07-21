@@ -52,9 +52,9 @@ module.exports = (env = {}) => {
         new UglifyJsPlugin({
           cache: true,
           parallel: true,
-          sourceMap: VARS.useSourceMaps, // set to true to have js source maps
+          sourceMap: VARS.useSourceMaps,
         }),
-        new OptimizeCSSAssetsPlugin(), // using it source maps are not generated but css optimized
+        new OptimizeCSSAssetsPlugin(), // using it, source maps are not generated but css optimized
       ],
       splitChunks: {
         minSize: 10000,
