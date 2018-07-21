@@ -1,9 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 import BookItemComponent from '../BookItemComponent';
 
 describe('books / bookItem / BookItemComponent', () => {
-  let component;
+  let component: ShallowWrapper;
   let props;
 
   beforeEach(() => {
