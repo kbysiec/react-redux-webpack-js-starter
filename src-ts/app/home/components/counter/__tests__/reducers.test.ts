@@ -1,5 +1,5 @@
 import reducer from '../_duck/reducers';
-import { CounterTypes } from '../_duck';
+import { CounterTypes } from '../_duck/types';
 
 jest.mock('../_duck/types', () => ({
   CounterTypes: {
@@ -11,14 +11,6 @@ describe('home / counter / duck / reducers', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-
-  // test('should return the initial state', () => {
-  //   const expectedState = {
-  //     counter: 0,
-  //   };
-
-  //   expect(reducer(undefined, {})).toEqual(expectedState);
-  // });
 
   test('should handle INCREMENT_COUNTER', () => {
     expect(

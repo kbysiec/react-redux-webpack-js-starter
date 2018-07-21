@@ -14,16 +14,6 @@ describe('books / duck / reducers', () => {
     jest.clearAllMocks();
   });
 
-  // test('should return the initial state', () => {
-  //   const expectedState = {
-  //     isLoading: false,
-  //     books: [],
-  //     error: null,
-  //   };
-
-  //   expect(reducer(undefined, {})).toEqual(expectedState);
-  // });
-
   test('should handle GET_DATA_REQUESTED', () => {
     const initialState = {
       isLoading: false,
