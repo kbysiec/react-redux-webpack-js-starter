@@ -3,7 +3,7 @@ import './counter.scss';
 
 export interface CounterComponentProps {
   counter: number;
-  incrementCounter(value: number): number;
+  incrementCounter(value: number): void;
 }
 
 class CounterComponent extends React.Component<CounterComponentProps> {

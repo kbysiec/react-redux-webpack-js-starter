@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import CounterComponent from './CounterComponent';
 import { counterOperations, CounterThunkDispatch } from './_duck';
-import { ApplicationState } from '../../../_duck/types';
+import { ApplicationState } from '../../../_duck';
 interface PropsFromState {
   counter: number;
 }

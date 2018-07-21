@@ -8,12 +8,12 @@ export enum CounterTypes {
   INCREMENT_COUNTER = 'INCREMENT_COUNTER',
 }
 
-type IncrementCounterActionType = {
+type CounterActionType = {
   type: CounterTypes.INCREMENT_COUNTER;
 };
 
 export type CounterThunkDispatch = ThunkDispatch<
   CounterState,
   undefined,
-  IncrementCounterActionType
+  CounterActionType
 >;

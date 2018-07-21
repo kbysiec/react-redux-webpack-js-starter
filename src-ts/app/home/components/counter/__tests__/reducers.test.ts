@@ -1,5 +1,5 @@
 import reducer from '../_duck/reducers';
-import { CounterTypes } from '../_duck/';
+import { CounterTypes } from '../_duck';
 
 jest.mock('../_duck/types', () => ({
   CounterTypes: {

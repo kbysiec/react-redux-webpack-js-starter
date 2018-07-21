@@ -1,10 +1,9 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
-// import { spy } from 'sinon';
+import { shallow, mount, ShallowWrapper, ReactWrapper } from 'enzyme';
 import CounterComponent, { CounterComponentProps } from '../CounterComponent';
 
 describe('home / counter / CounterComponent', () => {
-  let component;
+  let component: ShallowWrapper | ReactWrapper;
   let props: CounterComponentProps;
 
   beforeEach(() => {
