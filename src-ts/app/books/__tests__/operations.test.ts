@@ -6,7 +6,7 @@ import operations from '../_duck/operations';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
-let axiosMock;
+let axiosMock: MockAdapter;
 
 describe('books / duck / operations', () => {
   beforeEach(() => {
@@ -45,7 +45,7 @@ describe('books / duck / operations', () => {
       },
     ];
     expect.assertions(1);
-    return store.dispatch(operations.getData()).then(() => {
+    return store.dispatch(operations.getData() as any).then(() => {
       const actions = store.getActions();
       expect(actions).toEqual(expectedActions);
     });
@@ -72,7 +72,7 @@ describe('books / duck / operations', () => {
       },
     ];
     expect.assertions(1);
-    return store.dispatch(operations.getData()).then(() => {
+    return store.dispatch(operations.getData() as any).then(() => {
       const actions = store.getActions();
       expect(actions).toEqual(expectedActions);
     });

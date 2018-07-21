@@ -1,14 +1,15 @@
-import types from './types';
+import { Reducer } from 'redux';
+import { BooksTypes, BooksState } from './types';
 
-const INITIAL_STATE = {
+const INITIAL_STATE: BooksState = {
   isLoading: false,
   books: [],
   error: null,
 };
 
-const booksReducer = (state = INITIAL_STATE, action = {}) => {
+const booksReducer: Reducer<BooksState> = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case types.GET_DATA_REQUESTED: {
+    case BooksTypes.GET_DATA_REQUESTED: {
       return {
         ...state,
         isLoading: true,
@@ -16,7 +17,7 @@ const booksReducer = (state = INITIAL_STATE, action = {}) => {
         error: null,
       };
     }
-    case types.GET_DATA_DONE: {
+    case BooksTypes.GET_DATA_DONE: {
       return {
         ...state,
         isLoading: false,
@@ -24,7 +25,7 @@ const booksReducer = (state = INITIAL_STATE, action = {}) => {
         error: null,
       };
     }
-    case types.GET_DATA_FAILED: {
+    case BooksTypes.GET_DATA_FAILED: {
       return {
         ...state,
         isLoading: false,

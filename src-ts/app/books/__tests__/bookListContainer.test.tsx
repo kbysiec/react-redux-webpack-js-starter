@@ -4,6 +4,7 @@ import operations from '../_duck/operations';
 describe('books / container functions', () => {
   test('should mapStateToProps have expected props', () => {
     const initialState = {
+      counter: { value: 0 },
       books: {
         isLoading: false,
         books: [],

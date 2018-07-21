@@ -1,9 +1,10 @@
 import axios from 'axios';
+import { BooksThunkDispatch, Book } from './types';
 import actions from './actions';
 
 const { getDataRequested, getDataDone, getDataFailed } = actions;
 
-const getData = () => dispatch => {
+const getData = (): BooksThunkDispatch => (dispatch: BooksThunkDispatch) => {
   dispatch(getDataRequested());
 
   return (
@@ -13,7 +14,7 @@ const getData = () => dispatch => {
       .then(({ data }) => {
         dispatch(getDataDone(data.items));
       })
-      .catch(error => {
+      .catch((error: Error) => {
         dispatch(getDataFailed(error));
       })
   );

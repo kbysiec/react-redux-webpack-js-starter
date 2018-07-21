@@ -1,10 +1,12 @@
 import actions from '../_duck/actions';
-import types from '../_duck/types';
+import { BooksTypes, Book } from '../_duck/types';
 
 jest.mock('../_duck/types', () => ({
-  GET_DATA_REQUESTED: 'GET_DATA_REQUESTED',
-  GET_DATA_DONE: 'GET_DATA_DONE',
-  GET_DATA_FAILED: 'GET_DATA_FAILED',
+  BooksTypes: {
+    GET_DATA_REQUESTED: 'GET_DATA_REQUESTED',
+    GET_DATA_DONE: 'GET_DATA_DONE',
+    GET_DATA_FAILED: 'GET_DATA_FAILED',
+  },
 }));
 
 describe('books / duck / actions', () => {
@@ -26,21 +28,27 @@ describe('books / duck / actions', () => {
 
   test('should create an action with type GET_DATA_REQUESTED', () => {
     const expectedAction = {
-      type: types.GET_DATA_REQUESTED,
+      type: BooksTypes.GET_DATA_REQUESTED,
     };
     expect(actions.getDataRequested()).toEqual(expectedAction);
   });
 
   test('should create an action with type GET_DATA_DONE', () => {
-    const data = [
+    const data: Book[] = [
       {
-        name: 'John',
-        surname: 'Smith',
+        id: '12ab',
+        volumeInfo: {
+          title: 'Animals Jungle',
+          description: 'Animals Jungle description',
+          imageLinks: {
+            smallThumbnail: 'fakelink',
+          },
+        },
       },
     ];
 
     const expectedAction = {
-      type: types.GET_DATA_DONE,
+      type: BooksTypes.GET_DATA_DONE,
       payload: data,
     };
     expect(actions.getDataDone(data)).toEqual(expectedAction);
@@ -50,7 +58,7 @@ describe('books / duck / actions', () => {
     const error = new Error('Fetching data error');
 
     const expectedAction = {
-      type: types.GET_DATA_FAILED,
+      type: BooksTypes.GET_DATA_FAILED,
       payload: error,
     };
     expect(actions.getDataFailed(error)).toEqual(expectedAction);

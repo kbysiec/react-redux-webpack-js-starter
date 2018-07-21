@@ -1,18 +1,19 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
-// import { spy } from 'sinon';
-import BookListComponent from '../BookListComponent';
+import { shallow, mount, ShallowWrapper, ReactWrapper } from 'enzyme';
+import BookListComponent, {
+  BookListComponentProps,
+} from '../BookListComponent';
 
 describe('books / BookListComponent', () => {
-  let component;
-  let props;
+  let component: ShallowWrapper | ReactWrapper;
+  let props: BookListComponentProps;
 
   beforeEach(() => {
     props = {
       isLoading: false,
       books: [
         {
-          id: 1,
+          id: '1asv',
           volumeInfo: {
             title: 'Title',
             description: 'Description',

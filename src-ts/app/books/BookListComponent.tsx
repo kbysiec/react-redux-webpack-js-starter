@@ -1,23 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import BookItemComponent from './components/bookItem/BookItemComponent';
+import { Book } from './_duck/types';
 import './bookList.scss';
 
-// const QuotesComponent = () => (
-//   <div>
-//     <h1>Quotes</h1>
-//   </div>
-// );
+export interface BookListComponentProps {
+  isLoading: boolean;
+  books: Book[];
+  error: Error | null;
+  getData(): void;
+}
 
-// export default QuotesComponent;
-
-class BookListComponent extends React.Component {
+class BookListComponent extends React.Component<BookListComponentProps> {
   componentDidMount() {
     this.props.getData();
   }
 
   renderBookItems() {
-    return this.props.books.map(book => {
+    return this.props.books.map((book: Book) => {
       const { id, volumeInfo } = book;
       return <BookItemComponent info={volumeInfo} key={id} />;
     });
@@ -41,11 +40,5 @@ class BookListComponent extends React.Component {
     );
   }
 }
-
-BookListComponent.propTypes = {
-  isLoading: PropTypes.bool.isRequired,
-  books: PropTypes.arrayOf(PropTypes.object).isRequired,
-  getData: PropTypes.func.isRequired,
-};
 
 export default BookListComponent;

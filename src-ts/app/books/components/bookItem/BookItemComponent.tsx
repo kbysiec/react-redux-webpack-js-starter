@@ -1,8 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './bookItem.scss';
 
-const BookItemComponent = ({ info }) => {
+export interface BookItemComponentProps {
+  info: {
+    title: string;
+    description: string;
+    imageLinks: {
+      smallThumbnail: string;
+    };
+  };
+}
+
+const BookItemComponent: React.SFC<BookItemComponentProps> = ({ info }) => {
   const {
     title,
     description,
@@ -21,16 +30,6 @@ const BookItemComponent = ({ info }) => {
       <div className="book-item-clear" />
     </li>
   );
-};
-
-BookItemComponent.propTypes = {
-  info: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    imageLinks: PropTypes.shape({
-      smallThumbnail: PropTypes.string.isRequired,
-    }),
-  }).isRequired,
 };
 
 export default BookItemComponent;
