@@ -2,8 +2,9 @@ const path = require('path');
 
 const projectConfigPaths = {
   root: path.resolve(__dirname, '..'),
-  src: path.resolve(__dirname, '../src-ts'),
+  src: path.resolve(__dirname, '../src'),
   dist: path.resolve(__dirname, '../dist'),
+  srcFilename: 'index.jsx',
 };
 
 const projectConfigVars = {};

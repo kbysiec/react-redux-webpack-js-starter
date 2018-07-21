@@ -15,7 +15,7 @@ module.exports = (env = {}) => {
     cache: true,
     context: PATHS.root,
     entry: {
-      app: [`${PATHS.src}/index.tsx`],
+      app: [`${PATHS.src}/${PATHS.srcFilename}`],
     },
     output: {
       path: `${PATHS.dist}`,
