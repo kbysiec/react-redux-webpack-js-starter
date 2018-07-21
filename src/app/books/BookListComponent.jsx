@@ -3,14 +3,6 @@ import PropTypes from 'prop-types';
 import BookItemComponent from './components/bookItem/BookItemComponent';
 import './bookList.scss';
 
-// const QuotesComponent = () => (
-//   <div>
-//     <h1>Quotes</h1>
-//   </div>
-// );
-
-// export default QuotesComponent;
-
 class BookListComponent extends React.Component {
   componentDidMount() {
     this.props.getData();

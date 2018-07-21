@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import BookListComponent from './BookListComponent';
-import { quotesOperations } from './_duck';
+import { booksOperations } from './_duck';
 
 export const mapStateToProps = state => ({
   isLoading: state.books.isLoading,
@@ -9,7 +9,7 @@ export const mapStateToProps = state => ({
 });
 
 export const mapDispatchToProps = dispatch => ({
-  getData: () => dispatch(quotesOperations.getData()),
+  getData: () => dispatch(booksOperations.getData()),
 });
 
 const BookListContainer = connect(

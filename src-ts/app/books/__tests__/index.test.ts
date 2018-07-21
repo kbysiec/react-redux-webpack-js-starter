@@ -1,7 +1,7 @@
 import { BooksTypes, booksOperations } from '../_duck';
 
 describe('books / duck / index', () => {
-  test('should quotesTypes and quotesOperations exist', () => {
+  test('should booksTypes and booksOperations exist', () => {
     expect(BooksTypes).toBeDefined();
     expect(booksOperations).toBeDefined();
   });

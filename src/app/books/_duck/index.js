@@ -1,5 +1,5 @@
-import quotesReducer from './reducers';
+import booksReducer from './reducers';
 
-export { default as quotesTypes } from './types';
-export { default as quotesOperations } from './operations';
-export default quotesReducer;
+export { default as booksTypes } from './types';
+export { default as booksOperations } from './operations';
+export default booksReducer;
