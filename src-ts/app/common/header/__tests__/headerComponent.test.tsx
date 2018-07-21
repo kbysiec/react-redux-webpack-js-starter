@@ -1,9 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 import HeaderComponent from '../HeaderComponent';
 
 describe('common / header / HeaderComponent', () => {
-  let component;
+  let component: ShallowWrapper;
 
   beforeEach(() => {
     component = shallow(<HeaderComponent />);
