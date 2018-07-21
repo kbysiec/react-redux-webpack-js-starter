@@ -6,7 +6,7 @@ import { hot } from 'react-hot-loader';
 import HeaderComponent from './common/header/HeaderComponent';
 import FooterComponent from './common/footer/FooterComponent';
 import HomeComponent from './home/HomeComponent';
-// import BookListContainer from './books/BookListContainer';
+import BookListContainer from './books/BookListContainer';
 
 import './common/common.scss';
 
@@ -22,7 +22,7 @@ const App: React.SFC<AppProps> = ({ store }) => (
           <HeaderComponent />
           <div className="content">
             <Route exact path="/" component={HomeComponent} />
-            {/* <Route exact path="/books" component={BookListContainer} /> */}
+            <Route exact path="/books" component={BookListContainer} />
           </div>
         </div>
         <FooterComponent />
