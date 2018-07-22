@@ -13,7 +13,7 @@ import './common/common.scss';
 const App = ({ store }) => (
   <Provider store={store}>
     <Router>
-      <div>
+      <>
         <div className="container">
           <HeaderComponent />
           <div className="content">
@@ -22,7 +22,7 @@ const App = ({ store }) => (
           </div>
         </div>
         <FooterComponent />
-      </div>
+      </>
     </Router>
   </Provider>
 );

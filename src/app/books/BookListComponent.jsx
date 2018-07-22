@@ -18,18 +18,18 @@ class BookListComponent extends React.Component {
   render() {
     if (this.props.isLoading) {
       return (
-        <div>
+        <>
           <h1>Books</h1>
           <div className="book-loader">Data is loading...</div>
           <div className="book-loader-spinner" />
-        </div>
+        </>
       );
     }
     return (
-      <div>
+      <>
         <h1>Books</h1>
         <ul className="book-list">{this.renderBookItems()}</ul>
-      </div>
+      </>
     );
   }
 }

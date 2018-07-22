@@ -17,7 +17,7 @@ interface AppProps {
 const App: React.SFC<AppProps> = ({ store }) => (
   <Provider store={store}>
     <Router>
-      <div>
+      <>
         <div className="container">
           <HeaderComponent />
           <div className="content">
@@ -26,7 +26,7 @@ const App: React.SFC<AppProps> = ({ store }) => (
           </div>
         </div>
         <FooterComponent />
-      </div>
+      </>
     </Router>
   </Provider>
 );
