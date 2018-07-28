@@ -36,8 +36,6 @@ module.exports = (env = {}) => {
       extensions: [
         '.js',
         '.jsx',
-        '.ts',
-        '.tsx',
         '.scss',
         '.less',
         '.html',
@@ -78,18 +76,6 @@ module.exports = (env = {}) => {
           use: 'eslint-loader',
         },
         {
-          enforce: 'pre',
-          test: /\.tsx?$/,
-          exclude: /node_modules/,
-          use: {
-            loader: 'tslint-loader',
-            options: {
-              failOnHint: true,
-              emitErrors: false,
-            },
-          },
-        },
-        {
           test: /\.jsx?$/,
           exclude: /node_modules/,
           use: [
@@ -113,50 +99,6 @@ module.exports = (env = {}) => {
                 cacheDirectory: true,
               },
             },
-          ],
-        },
-        {
-          test: /\.tsx?$/,
-          exclude: /node_modules/,
-          use: [
-            {
-              loader: 'babel-loader',
-              options: {
-                presets: [
-                  [
-                    '@babel/env',
-                    {
-                      targets: {
-                        browsers: VARS.supportedBrowsers,
-                      },
-                      useBuiltIns: VARS.useBabelPolyfill,
-                      debug: false,
-                    },
-                  ],
-                ],
-                plugins: ['@babel/plugin-syntax-dynamic-import'],
-                cacheDirectory: true,
-              },
-            },
-            VARS.useAwesomeLoader
-              ? {
-                  loader: 'awesome-typescript-loader',
-                  options: {
-                    transpileOnly: true,
-                    useBabel: true,
-                    useTranspileModule: false,
-                    sourceMap: VARS.useSourceMaps,
-                  },
-                }
-              : {
-                  loader: 'ts-loader',
-                  options: {
-                    transpileOnly: true,
-                    compilerOptions: {
-                      sourceMap: VARS.useSourceMaps,
-                    },
-                  },
-                },
           ],
         },
         {
