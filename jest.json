@@ -1,29 +1,13 @@
 {
   "verbose": true,
-  "moduleFileExtensions": ["ts", "tsx", "js", "jsx"],
+  "moduleFileExtensions": ["js", "jsx"],
   "transform": {
-    "^.+\\.jsx?$": "<rootDir>/config/jest.babel.processor.setup.js",
-    "^.+\\.tsx?$": "ts-jest"
+    "^.+\\.jsx?$": "<rootDir>/config/jest.babel.processor.setup.js"
   },
-  "testRegex": "/__tests__/(\\w+.)?(test|spec).(jsx?|tsx?)$",
-  "testPathIgnorePatterns": [
-    "/node_modules/",
-    "/config/",
-    "/typings/",
-    "/dist/"
-  ],
-  "coveragePathIgnorePatterns": [
-    "/node_modules/",
-    "/config/",
-    "/typings/",
-    "/dist/"
-  ],
-  "modulePathIgnorePatterns": [
-    "/node_modules/",
-    "/config/",
-    "/typings/",
-    "/dist/"
-  ],
+  "testRegex": "/__tests__/(\\w+.)?(test|spec).jsx?$",
+  "testPathIgnorePatterns": ["/node_modules/", "/config/", "/dist/"],
+  "coveragePathIgnorePatterns": ["/node_modules/", "/config/", "/dist/"],
+  "modulePathIgnorePatterns": ["/node_modules/", "/config/", "/dist/"],
   "globals": {
     "window": {}
   },
