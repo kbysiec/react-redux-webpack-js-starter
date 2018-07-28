@@ -12,7 +12,6 @@ const projectConfigVarsDefaults = {
   useDashboard: false,
   useBabelPolyfill: 'entry',
   useSourceMaps: true,
-  useAwesomeLoader: false,
   supportedBrowsers: ['>0.25%'],
 };
 
@@ -27,9 +26,6 @@ const configure = function(env) {
     useSourceMaps: env.useSourceMaps
       ? env.useSourceMaps == 'true'
       : projectConfigVarsDefaults.useSourceMaps,
-    useAwesomeLoader: env.useAwesomeLoader
-      ? env.useAwesomeLoader == 'true'
-      : projectConfigVarsDefaults.useAwesomeLoader,
     supportedBrowsers: env.supportedBrowsers
       ? env.supportedBrowsers.split(',').map(s => s.trim())
       : projectConfigVarsDefaults.supportedBrowsers,
