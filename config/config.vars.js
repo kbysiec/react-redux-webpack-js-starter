@@ -18,19 +18,19 @@ const projectConfigVarsDefaults = {
 
 const configure = function(env) {
   Object.assign(projectConfigVars, {
-    useDashboard: env.dashboard
-      ? env.dashboard == 'true'
+    useDashboard: env.useDashboard
+      ? env.useDashboard == 'true'
       : projectConfigVarsDefaults.useDashboard,
-    useBabelPolyfill: env.babelPolyfill
-      ? env.babelPolyfill
+    useBabelPolyfill: env.useBabelPolyfill
+      ? env.useBabelPolyfill
       : projectConfigVarsDefaults.useBabelPolyfill,
-    useSourceMaps: env.sourceMaps
-      ? env.sourceMaps == 'true'
+    useSourceMaps: env.useSourceMaps
+      ? env.useSourceMaps == 'true'
       : projectConfigVarsDefaults.useSourceMaps,
-    useAwesomeLoader: env.awesomeLoader
-      ? env.awesomeLoader == 'true'
+    useAwesomeLoader: env.useAwesomeLoader
+      ? env.useAwesomeLoader == 'true'
       : projectConfigVarsDefaults.useAwesomeLoader,
-    supportedBrowsers: env.supportedBrobabelPolyfillwsers
+    supportedBrowsers: env.supportedBrowsers
       ? env.supportedBrowsers.split(',').map(s => s.trim())
       : projectConfigVarsDefaults.supportedBrowsers,
   });

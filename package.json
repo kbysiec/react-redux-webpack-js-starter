@@ -7,7 +7,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "webpack-dev-server --config config/webpack.dev.config.js --open",
-    "dev:dashboard": "webpack-dashboard -m -- webpack-dev-server --config config/webpack.dev.config.js --env.dashboard=true --open",
+    "dev:dashboard": "webpack-dashboard -m -- webpack-dev-server --config config/webpack.dev.config.js --env.useDashboard=true --open",
     "build": "webpack --config config/webpack.prod.config.js",
     "lint:scripts": "eslint src/** && tslint --project ./tsconfig.json",
     "lint:styles": "stylelint src/**/*.{css,scss,less}",
