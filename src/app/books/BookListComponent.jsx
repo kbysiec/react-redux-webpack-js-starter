@@ -5,18 +5,21 @@ import './bookList.scss';
 
 class BookListComponent extends React.Component {
   componentDidMount() {
-    this.props.getData();
+    const { getData } = this.props;
+    getData();
   }
 
   renderBookItems() {
-    return this.props.books.map(book => {
+    const { books } = this.props;
+    return books.map(book => {
       const { id, volumeInfo } = book;
       return <BookItemComponent info={volumeInfo} key={id} />;
     });
   }
 
   render() {
-    if (this.props.isLoading) {
+    const { isLoading } = this.props;
+    if (isLoading) {
       return (
         <>
           <h1>Books</h1>

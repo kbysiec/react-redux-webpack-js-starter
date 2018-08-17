@@ -4,11 +4,13 @@ import './counter.scss';
 
 class CounterComponent extends React.Component {
   componentDidMount() {
-    const incrementCounter = () => {
-      this.props.incrementCounter(this.props.counter + 1);
+    const { incrementCounter } = this.props;
+    const incrementCounterValue = () => {
+      const { counter } = this.props;
+      incrementCounter(counter + 1);
     };
 
-    this.counterInterval = setInterval(incrementCounter, 1000);
+    this.counterInterval = setInterval(incrementCounterValue, 1000);
   }
 
   componentWillUnmount() {
@@ -16,7 +18,8 @@ class CounterComponent extends React.Component {
   }
 
   render() {
-    return <div className="counter">value: {this.props.counter}</div>;
+    const { counter } = this.props;
+    return <div className="counter">value: {counter}</div>;
   }
 }
 

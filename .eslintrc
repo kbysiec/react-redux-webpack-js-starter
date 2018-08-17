@@ -18,7 +18,9 @@
       "error",
       { "components": ["Link"], "specialLink": ["to"] }
     ],
+    "react/jsx-one-expression-per-line": 0,
     "react/jsx-filename-extension": 1,
-    "global-require": 1
+    "global-require": 1,
+    "linebreak-style": "off"
   }
 }
