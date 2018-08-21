@@ -1,7 +1,7 @@
 {
-  "name": "react-redux-webpack-typescript-template",
+  "name": "react-redux-webpack-js-starter",
   "version": "0.1.0",
-  "description": "This is template for easy start for react redux typescript application",
+  "description": "This is template for easy start for react redux application powered by weback and written in JavaScript",
   "author": "Kamil Bysiec",
   "license": "MIT",
   "main": "app.js",
