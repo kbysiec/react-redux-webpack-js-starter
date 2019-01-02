@@ -224,20 +224,14 @@ ShallowWrapper {
           "componentDidUpdate": Object {
             "onSetState": true,
           },
-<<<<<<< HEAD
-          "getSnapshotBeforeUpdate": true,
-=======
           "getDerivedStateFromProps": true,
           "getSnapshotBeforeUpdate": true,
           "setState": Object {
             "skipsComponentDidUpdateOnNullish": true,
           },
->>>>>>> npm-update
         },
       },
     },
-    "attachTo": undefined,
-    "hydrateIn": undefined,
   },
 }
 `;
