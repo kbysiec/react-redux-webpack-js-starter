@@ -19,11 +19,12 @@ module.exports = (env = {}) => {
     },
     output: {
       path: `${PATHS.dist}`,
-      publicPath: '',
-      filename: 'js/[name].js',
-      chunkFilename: 'js/[name].js',
+      publicPath: `${PATHS.public}`,
+      filename: 'js/[name].[hash].js',
+      chunkFilename: 'js/[name].[hash].js',
     },
     watch: true,
+    stats: 'minimal',
     devtool: 'eval-source-map',
     devServer: {
       port: 9000,
@@ -42,19 +43,30 @@ module.exports = (env = {}) => {
         '.json',
       ],
       modules: ['src', 'node_modules'],
+      alias: {
+        'react-dom': '@hot-loader/react-dom',
+      },
     },
     optimization: {
       namedModules: true,
       runtimeChunk: true /* "single" */,
       splitChunks: {
-        minSize: 10000,
-        maxAsyncRequests: 2,
-        maxInitialRequests: 2,
+        chunks: 'all',
+        minSize: 0,
+        maxAsyncRequests: Infinity,
+        maxInitialRequests: Infinity,
         cacheGroups: {
           vendors: {
-            chunks: 'all',
+            name: 'vendors',
             test: /[\\/]node_modules[\\/]/,
             reuseExistingChunk: true,
+            priority: -10,
+          },
+          common: {
+            name: 'common',
+            minChunks: 2,
+            reuseExistingChunk: true,
+            priority: -20,
           },
         },
       },
@@ -81,7 +93,8 @@ module.exports = (env = {}) => {
                       targets: {
                         browsers: VARS.supportedBrowsers,
                       },
-                      useBuiltIns: VARS.useBabelPolyfill,
+                      useBuiltIns: VARS.babelPolyfill,
+					  corejs: 3,
                       debug: false,
                     },
                   ],
@@ -90,6 +103,12 @@ module.exports = (env = {}) => {
                 plugins: [
                   '@babel/plugin-syntax-dynamic-import',
                   '@babel/plugin-proposal-class-properties',
+				  [
+                   '@babel/plugin-transform-runtime',
+                   {
+                     corejs: 3,
+                   },
+                 ],
                   'react-hot-loader/babel',
                 ],
                 cacheDirectory: true,
@@ -105,7 +124,7 @@ module.exports = (env = {}) => {
             {
               loader: 'css-loader',
               options: {
-                sourceMap: VARS.useSourceMaps,
+                sourceMap: VARS.sourceMaps,
               },
             },
             {
@@ -116,7 +135,7 @@ module.exports = (env = {}) => {
                     browsers: VARS.supportedBrowsers,
                   }),
                 ],
-                sourceMap: VARS.useSourceMaps,
+                sourceMap: VARS.sourceMaps,
               },
             },
           ],
@@ -129,7 +148,7 @@ module.exports = (env = {}) => {
             {
               loader: 'css-loader',
               options: {
-                sourceMap: VARS.useSourceMaps,
+                sourceMap: VARS.sourceMaps,
               },
             },
             {
@@ -140,13 +159,13 @@ module.exports = (env = {}) => {
                     browsers: VARS.supportedBrowsers,
                   }),
                 ],
-                sourceMap: VARS.useSourceMaps,
+                sourceMap: VARS.sourceMaps,
               },
             },
             {
               loader: 'sass-loader',
               options: {
-                sourceMap: VARS.useSourceMaps,
+                sourceMap: VARS.sourceMaps,
               },
             },
           ],
@@ -159,7 +178,7 @@ module.exports = (env = {}) => {
             {
               loader: 'css-loader',
               options: {
-                sourceMap: VARS.useSourceMaps,
+                sourceMap: VARS.sourceMaps,
               },
             },
             {
@@ -170,13 +189,13 @@ module.exports = (env = {}) => {
                     browsers: VARS.supportedBrowsers,
                   }),
                 ],
-                sourceMap: VARS.useSourceMaps,
+                sourceMap: VARS.sourceMaps,
               },
             },
             {
               loader: 'less-loader',
               options: {
-                sourceMap: VARS.useSourceMaps,
+                sourceMap: VARS.sourceMaps,
               },
             },
           ],
@@ -226,7 +245,7 @@ module.exports = (env = {}) => {
       new StyleLintPlugin({
         files: 'src/**/*.(css|scss|less)',
       }),
-      ...(VARS.useDashboard ? [new DashboardPlugin()] : []),
+      ...(VARS.dashboard ? [new DashboardPlugin()] : []),
     ],
   };
 };

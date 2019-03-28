@@ -6,10 +6,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin;
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const AutoDllPlugin = require('autodll-webpack-plugin');
 
 const { configure } = require('./config.vars');
 
@@ -26,11 +26,12 @@ module.exports = (env = {}) => {
     },
     output: {
       path: `${PATHS.dist}`,
-      publicPath: '',
-      filename: 'js/[name].js',
-      chunkFilename: 'js/[name].js',
+      publicPath: `${PATHS.public}`,
+      filename: 'js/[name].[hash].js',
+      chunkFilename: 'js/[name].[hash].js',
       sourceMapFilename: 'map/[file].map',
     },
+    stats: 'errors-only',
     devtool: 'source-map',
     resolve: {
       extensions: [
@@ -50,19 +51,27 @@ module.exports = (env = {}) => {
         new UglifyJsPlugin({
           cache: true,
           parallel: true,
-          sourceMap: VARS.useSourceMaps,
+          sourceMap: VARS.sourceMaps,
         }),
         new OptimizeCSSAssetsPlugin(), // using it, source maps are not generated but css optimized
       ],
       splitChunks: {
-        minSize: 10000,
-        maxAsyncRequests: 2,
-        maxInitialRequests: 2,
+        chunks: 'all',
+        minSize: 0,
+        maxAsyncRequests: Infinity,
+        maxInitialRequests: Infinity,
         cacheGroups: {
           vendors: {
-            chunks: 'all',
+            name: 'vendors',
             test: /[\\/]node_modules[\\/]/,
             reuseExistingChunk: true,
+            priority: -10,
+          },
+          common: {
+            name: 'common',
+            minChunks: 2,
+            reuseExistingChunk: true,
+            priority: -20,
           },
         },
       },
@@ -89,7 +98,8 @@ module.exports = (env = {}) => {
                       targets: {
                         browsers: VARS.supportedBrowsers,
                       },
-                      useBuiltIns: VARS.useBabelPolyfill,
+                      useBuiltIns: VARS.babelPolyfill,
+					  corejs: 3,
                       debug: false,
                     },
                   ],
@@ -98,6 +108,12 @@ module.exports = (env = {}) => {
                 plugins: [
                   '@babel/plugin-syntax-dynamic-import',
                   '@babel/plugin-proposal-class-properties',
+				  [
+                    '@babel/plugin-transform-runtime',
+                    {
+                      corejs: 3,
+                    },
+                  ],
                 ],
                 cacheDirectory: true,
               },
@@ -117,7 +133,7 @@ module.exports = (env = {}) => {
             {
               loader: 'css-loader',
               options: {
-                sourceMap: VARS.useSourceMaps,
+                sourceMap: VARS.sourceMaps,
               },
             },
             {
@@ -128,7 +144,7 @@ module.exports = (env = {}) => {
                     browsers: VARS.supportedBrowsers,
                   }),
                 ],
-                sourceMap: VARS.useSourceMaps,
+                sourceMap: VARS.sourceMaps,
               },
             },
           ],
@@ -146,7 +162,7 @@ module.exports = (env = {}) => {
             {
               loader: 'css-loader',
               options: {
-                sourceMap: VARS.useSourceMaps,
+                sourceMap: VARS.sourceMaps,
               },
             },
             {
@@ -157,13 +173,13 @@ module.exports = (env = {}) => {
                     browsers: VARS.supportedBrowsers,
                   }),
                 ],
-                sourceMap: VARS.useSourceMaps,
+                sourceMap: VARS.sourceMaps,
               },
             },
             {
               loader: 'sass-loader',
               options: {
-                sourceMap: VARS.useSourceMaps,
+                sourceMap: VARS.sourceMaps,
               },
             },
           ],
@@ -181,7 +197,7 @@ module.exports = (env = {}) => {
             {
               loader: 'css-loader',
               options: {
-                sourceMap: VARS.useSourceMaps,
+                sourceMap: VARS.sourceMaps,
               },
             },
             {
@@ -192,13 +208,13 @@ module.exports = (env = {}) => {
                     browsers: VARS.supportedBrowsers,
                   }),
                 ],
-                sourceMap: VARS.useSourceMaps,
+                sourceMap: VARS.sourceMaps,
               },
             },
             {
               loader: 'less-loader',
               options: {
-                sourceMap: VARS.useSourceMaps,
+                sourceMap: VARS.sourceMaps,
               },
             },
           ],
@@ -240,8 +256,8 @@ module.exports = (env = {}) => {
           NODE_ENV: JSON.stringify('production'),
         },
       }),
-      new CleanWebpackPlugin([`${PATHS.dist}/**/*`], {
-        root: PATHS.root,
+      new CleanWebpackPlugin({
+        cleanOnceBeforeBuildPatterns: [`${PATHS.dist}/**/*`],
       }),
       new StyleLintPlugin({
         files: 'src/**/*.(css|scss|less)',
@@ -257,10 +273,30 @@ module.exports = (env = {}) => {
         openAnalyzer: false,
       }),
       new MiniCssExtractPlugin({
-        filename: 'css/[name].css',
-        chunkFilename: 'css/[name].css',
+        filename: 'css/[name].[contenthash].css',
+        chunkFilename: 'css/[name].[contenthash].css',
       }),
-      // new HardSourceWebpackPlugin(),
+      new AutoDllPlugin({
+        inject: true, // will inject the DLL bundles to index.html
+        filename: '[name].[hash].js',
+        path: 'js',
+        entry: {
+          dll: [
+            '@babel/polyfill',
+            'axios',
+            'prop-types',
+            'react',
+            'react-dom',
+            'react-hot-loader',
+            'react-redux',
+            'react-router-dom',
+            'redux',
+            'redux-thunk',
+            'redux-logger',
+          ],
+        },
+      }),
+      new HardSourceWebpackPlugin(),
     ],
   };
 };
