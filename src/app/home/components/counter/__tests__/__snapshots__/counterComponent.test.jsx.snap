@@ -1,5 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+<<<<<<< HEAD
 exports[`home / counter / CounterComponent should match snapshot 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
@@ -72,3 +73,6 @@ ShallowWrapper {
   },
 }
 `;
+=======
+exports[`home / counter / CounterComponent should match snapshot 1`] = `ShallowWrapper {}`;
+>>>>>>> master
