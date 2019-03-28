@@ -21,6 +21,10 @@ For pure TypeScript starter check [react-redux-webpack-ts-starter](https://githu
 
 - up to date with the newest versions of packages (e.g. `webpack 4`, `react-hot-loader 4` and `babel 7`)
 
+- focused on build performance (used both `autodll-webpack-plugin` and `hard-source-webpack-plugin`)
+
+- code splitting
+
 - plain readable project structure after production build
 
 - implementation of duck pattern (easy in development, maintenance, scalability)
