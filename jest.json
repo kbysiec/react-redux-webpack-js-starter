@@ -5,14 +5,29 @@
   "transform": {
     "^.+\\.jsx?$": "<rootDir>/config/jest.babel.processor.setup.js"
   },
-  "testRegex": "/__tests__/([a-zA-Z0-9]+.)?(test|spec).jsx?$",
-  "testPathIgnorePatterns": ["/node_modules/", "/config/", "/dist/"],
-  "coveragePathIgnorePatterns": ["/node_modules/", "/config/", "/dist/"],
-  "modulePathIgnorePatterns": ["/node_modules/", "/config/", "/dist/"],
+  "testRegex": "/__tests__/([a-zA-Z0-9]+.)?(test|spec).(jsx?|tsx?)$",
+  "testPathIgnorePatterns": [
+    "/node_modules/",
+    "/config/",
+    "/typings/",
+    "/dist/"
+  ],
+  "coveragePathIgnorePatterns": [
+    "/node_modules/",
+    "/config/",
+    "/typings/",
+    "/dist/"
+  ],
+  "modulePathIgnorePatterns": [
+    "/node_modules/",
+    "/config/",
+    "/typings/",
+    "/dist/"
+  ],
   "globals": {
     "window": {}
   },
-  "setupTestFrameworkScriptFile": "<rootDir>/config/jest.framework.setup.js",
+  "setupFilesAfterEnv": ["<rootDir>/config/jest.framework.setup.js"],
   "setupFiles": ["<rootDir>/config/jest.stubs.setup.js"],
   "moduleNameMapper": {
     ".+\\.(css|styl|less|sass|scss)$": "identity-obj-proxy",
